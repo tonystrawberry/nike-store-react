@@ -23,7 +23,7 @@ class ProductOverview extends PureComponent {
     return (
       <div className="product-overview" onClick={() => this.props.onSelected(1)}>
         <div className="product-photo__container">
-          <img className="product-photo" src={NikeAirForce}></img>
+          <img className="product-photo" src={NikeAirForce} alt="Nike Air Force"></img>
         </div>
         <div className="product-overview__info">
           <h1 className="product-overview__title">Nike Air Force 1</h1>
