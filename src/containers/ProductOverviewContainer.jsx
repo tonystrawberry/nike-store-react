@@ -1,10 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, lazy, Suspense } from 'react';
 import { connect } from 'react-redux';
 
 import ProductOverview from '../components/ProductOverview';
-import ProductCard from '../components/ProductCard';
+import Loading from '../components/Loading';
 
 import './ProductOverviewContainer.css';
+
+const ProductCardLazy = React.lazy(() => import('../components/ProductCard'));
 
 const mapStateToProps = (state) => {
   return {
@@ -34,7 +36,9 @@ class ProductOverviewList extends PureComponent {
             <ProductOverview />
           </React.Fragment>
           :
-          <ProductCard />
+          <Suspense fallback={<Loading />}>
+            <ProductCardLazy />
+          </Suspense>
         }
       </div>
     );

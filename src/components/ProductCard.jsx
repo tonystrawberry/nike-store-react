@@ -6,7 +6,6 @@ import { unselectProduct } from '../redux/actions';
 import './ProductOverview.css';
 import './ProductCard.css';
 import Logo from '../assets/nike_logo.svg';
-import NikeAirForceSmall from '../assets/nike_airforce-small.jpg';
 import NikeAirForceMedium from '../assets/nike_airforce-medium.jpg';
 import NikeAirForceLarge from '../assets/nike_airforce-large.jpg';
 
@@ -79,8 +78,8 @@ class ProductCard extends PureComponent {
           <div className="product-card__photo-container">
             <img src={Logo} alt="Nike Logo" className="product-card__logo" />
             <a href="#" className="product-card__share"><i className="fas fa-share-alt"></i></a>
-            <img src={NikeAirForceLarge} 
-              srcSet={`${NikeAirForceSmall} 216w, ${NikeAirForceMedium} 432w, ${NikeAirForceLarge} 864w`} 
+            <img src={NikeAirForceMedium} 
+              srcSet={`${NikeAirForceMedium} 432w, ${NikeAirForceLarge} 864w`} 
               sizes='(max-width: 500px) 432px, 864px'
               alt="Product Photography" className="product-card__photo"/>
           </div>

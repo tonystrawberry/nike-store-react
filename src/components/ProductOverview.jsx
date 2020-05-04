@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { selectProduct } from '../redux/actions';
 
 import NikeAirForceSmall from '../assets/nike_airforce-small.jpg';
-import NikeAirForceMedium from '../assets/nike_airforce-medium.jpg';
-import NikeAirForceLarge from '../assets/nike_airforce-large.jpg';
 
 import './ProductOverview.css';
 
