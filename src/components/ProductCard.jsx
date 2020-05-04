@@ -31,6 +31,7 @@ class ProductCard extends PureComponent {
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
     window.addEventListener('resize', this.updateDimensions);
+    this.updateDimensions();
   }
 
   componentWillUnmount() {
@@ -61,8 +62,8 @@ class ProductCard extends PureComponent {
   
     if (x.matches){
       // shoeBackgroundの新しいheight計算
-      let height = photo[0].offsetHeight; // offsetHeight = elementのheight + elementのpadding + elementのborder
-      pc.style.height = `${height * 0.9}px`;
+      let width = photo[0].offsetWidth; // offsetHeight = elementのheight + elementのpadding + elementのborder
+      pc.style.height = `${width}px`;
     } else {
       pc.style.height = '475px';
     }
