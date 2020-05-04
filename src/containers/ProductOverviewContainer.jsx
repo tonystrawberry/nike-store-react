@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-class ProductOverviewList extends PureComponent {
+class ProductOverviewContainer extends PureComponent {
 
   render() {
     return (
@@ -45,4 +45,4 @@ class ProductOverviewList extends PureComponent {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductOverviewList);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductOverviewContainer);

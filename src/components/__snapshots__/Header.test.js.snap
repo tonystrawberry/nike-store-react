@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expect to render Header component 1`] = `
+<header>
+  <a
+    href="/"
+  >
+    <img
+      alt="Nike"
+      className="logo"
+      src="nike_logo.svg"
+    />
+  </a>
+</header>
+`;
