@@ -24,6 +24,13 @@ describe('selectProduct', () => {
     })
   })
 
+  it ('should return the initial state without parameters', () => {
+    expect(reducers.selectProduct()).toEqual({
+      selected: false,
+      selectedProductId: null
+    })
+  })
+
   it('should handle SELECT_PRODUCT', () => {
     expect(reducers.selectProduct(initialState, {
       type: SELECT_PRODUCT, payload: 1
