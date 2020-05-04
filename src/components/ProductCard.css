@@ -335,10 +335,13 @@
   text-decoration: none;
   border-radius: 30px;
   margin-bottom: 10px;
+  border: 1px solid #111;
 }
 
 .product-card__buy:hover {
-  transform: scale(1.1);
+  color: #111111;
+  background: #fff;
+  border: 1px solid #ececec;
 }
 
 .product-card__buy i {
