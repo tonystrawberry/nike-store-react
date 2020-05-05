@@ -13,8 +13,11 @@ exports[`expect to render ProductCard component with matchMedia => false 1`] = `
     }
   }
 >
-  <Connect(ProductCard)>
+  <Connect(ProductCard)
+    new={true}
+  >
     <ProductCard
+      new={true}
       onUnselected={[Function]}
     >
       <div
@@ -59,6 +62,11 @@ exports[`expect to render ProductCard component with matchMedia => false 1`] = `
                 >
                   Nike Air Force 1
                 </h1>
+                <span
+                  className="new"
+                >
+                  new
+                </span>
               </div>
               <h3
                 className="small"
@@ -89,27 +97,22 @@ exports[`expect to render ProductCard component with matchMedia => false 1`] = `
                 <span
                   className="product-card__color"
                   color="blue"
-                  primary="#2175f5"
                 />
                 <span
                   className="product-card__color"
                   color="red"
-                  primary="#f84848"
                 />
                 <span
                   className="product-card__color"
                   color="green"
-                  primary="#29b864"
                 />
                 <span
                   className="product-card__color"
                   color="orange"
-                  primary="#ff5521"
                 />
                 <span
                   className="product-card__color"
                   color="black"
-                  primary="#444"
                 />
               </div>
             </div>
@@ -183,7 +186,7 @@ exports[`expect to render ProductCard component with matchMedia => false 1`] = `
 `;
 
 exports[`expect to render ProductCard component with matchMedia => true 1`] = `
-<Connect(ProductCard)
+<Provider
   store={
     Object {
       "clearActions": [Function],
@@ -195,179 +198,174 @@ exports[`expect to render ProductCard component with matchMedia => true 1`] = `
     }
   }
 >
-  <ProductCard
-    onUnselected={[Function]}
-    store={
-      Object {
-        "clearActions": [Function],
-        "dispatch": [Function],
-        "getActions": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-      }
-    }
+  <Connect(ProductCard)
+    new={true}
   >
-    <div
-      className="product-card__container"
+    <ProductCard
+      new={true}
+      onUnselected={[Function]}
     >
       <div
-        className="product-card__card"
+        className="product-card__container"
       >
         <div
-          className="product-card__photo-container"
+          className="product-card__card"
         >
-          <img
-            alt="Nike Logo"
-            className="product-card__logo"
-            src="nike_logo.svg"
-          />
-          <a
-            className="product-card__share"
-            href="#"
+          <div
+            className="product-card__photo-container"
           >
-            <i
-              className="fas fa-share-alt"
+            <img
+              alt="Nike Logo"
+              className="product-card__logo"
+              src="nike_logo.svg"
             />
-          </a>
-          <img
-            alt="Product Photography"
-            className="product-card__photo"
-            sizes="(max-width: 500px) 432px, 864px"
-            src="nike_airforce-medium.jpg"
-            srcSet="nike_airforce-medium.jpg 432w, nike_airforce-large.jpg 864w"
-          />
-        </div>
-        <div
-          className="product-card__info"
-        >
-          <div
-            className="product-card__name"
-          >
-            <div>
-              <h1
-                className="big"
-              >
-                Nike Air Force 1
-              </h1>
-            </div>
-            <h3
-              className="small"
-            >
-              Men's Shoe
-            </h3>
-          </div>
-          <div
-            className="product-card__description"
-          >
-            <p
-              className="product-card__text"
-            >
-              The legend lives on in the Nike Air Force 1, which stays true to its roots with iconic AF1 style and Nike Air for all-day comfort and long-lasting wear.
-            </p>
-          </div>
-          <div
-            className="product-card__color-container"
-          >
-            <h3
-              className="product-card__title"
-            >
-              Color
-            </h3>
-            <div
-              className="product-card__colors"
-            >
-              <span
-                className="product-card__color"
-                color="blue"
-                primary="#2175f5"
-              />
-              <span
-                className="product-card__color"
-                color="red"
-                primary="#f84848"
-              />
-              <span
-                className="product-card__color"
-                color="green"
-                primary="#29b864"
-              />
-              <span
-                className="product-card__color"
-                color="orange"
-                primary="#ff5521"
-              />
-              <span
-                className="product-card__color"
-                color="black"
-                primary="#444"
-              />
-            </div>
-          </div>
-          <div
-            className="product-card__size-container"
-          >
-            <h3
-              className="product-card__title"
-            >
-              size
-            </h3>
-            <div
-              className="product-card__sizes"
-            >
-              <span
-                className="product-card__size"
-              >
-                7
-              </span>
-              <span
-                className="product-card__size"
-              >
-                8
-              </span>
-              <span
-                className="product-card__size"
-              >
-                9
-              </span>
-              <span
-                className="product-card__size"
-              >
-                10
-              </span>
-              <span
-                className="product-card__size"
-              >
-                11
-              </span>
-            </div>
-          </div>
-          <div
-            className="product-card__buy-price"
-          >
             <a
-              className="product-card__buy"
+              className="product-card__share"
               href="#"
             >
               <i
-                className="fas fa-shopping-cart"
+                className="fas fa-share-alt"
               />
-              Add to cart
             </a>
+            <img
+              alt="Product Photography"
+              className="product-card__photo"
+              sizes="(max-width: 500px) 432px, 864px"
+              src="nike_airforce-medium.jpg"
+              srcSet="nike_airforce-medium.jpg 432w, nike_airforce-large.jpg 864w"
+            />
+          </div>
+          <div
+            className="product-card__info"
+          >
             <div
-              className="product-card__price"
+              className="product-card__name"
             >
-              <i
-                className="fas fa-yen-sign"
-              />
-              <h1>
-                21,000
-              </h1>
+              <div>
+                <h1
+                  className="big"
+                >
+                  Nike Air Force 1
+                </h1>
+                <span
+                  className="new"
+                >
+                  new
+                </span>
+              </div>
+              <h3
+                className="small"
+              >
+                Men's Shoe
+              </h3>
+            </div>
+            <div
+              className="product-card__description"
+            >
+              <p
+                className="product-card__text"
+              >
+                The legend lives on in the Nike Air Force 1, which stays true to its roots with iconic AF1 style and Nike Air for all-day comfort and long-lasting wear.
+              </p>
+            </div>
+            <div
+              className="product-card__color-container"
+            >
+              <h3
+                className="product-card__title"
+              >
+                Color
+              </h3>
+              <div
+                className="product-card__colors"
+              >
+                <span
+                  className="product-card__color"
+                  color="blue"
+                />
+                <span
+                  className="product-card__color"
+                  color="red"
+                />
+                <span
+                  className="product-card__color"
+                  color="green"
+                />
+                <span
+                  className="product-card__color"
+                  color="orange"
+                />
+                <span
+                  className="product-card__color"
+                  color="black"
+                />
+              </div>
+            </div>
+            <div
+              className="product-card__size-container"
+            >
+              <h3
+                className="product-card__title"
+              >
+                size
+              </h3>
+              <div
+                className="product-card__sizes"
+              >
+                <span
+                  className="product-card__size"
+                >
+                  7
+                </span>
+                <span
+                  className="product-card__size"
+                >
+                  8
+                </span>
+                <span
+                  className="product-card__size"
+                >
+                  9
+                </span>
+                <span
+                  className="product-card__size"
+                >
+                  10
+                </span>
+                <span
+                  className="product-card__size"
+                >
+                  11
+                </span>
+              </div>
+            </div>
+            <div
+              className="product-card__buy-price"
+            >
+              <a
+                className="product-card__buy"
+                href="#"
+              >
+                <i
+                  className="fas fa-shopping-cart"
+                />
+                Add to cart
+              </a>
+              <div
+                className="product-card__price"
+              >
+                <i
+                  className="fas fa-yen-sign"
+                />
+                <h1>
+                  21,000
+                </h1>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </ProductCard>
-</Connect(ProductCard)>
+    </ProductCard>
+  </Connect(ProductCard)>
+</Provider>
 `;

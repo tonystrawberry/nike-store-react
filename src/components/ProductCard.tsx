@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { unselectProduct } from '../redux/actions';
+import { Dispatch } from 'redux';
 
 
 import './ProductOverview.css';
@@ -10,25 +11,38 @@ import NikeAirForceMedium from '../assets/nike_airforce-medium.jpg';
 import NikeAirForceLarge from '../assets/nike_airforce-large.jpg';
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
   return {
 
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch : Dispatch ) => {
   return {
     onUnselected: () => dispatch(unselectProduct())
   }
 }
 
-class ProductCard extends PureComponent {
-  constructor(props){
+interface IProductCardProps {
+  new: boolean,
+  onUnselected: {(): void}
+}
+
+interface IProductCardState {
+  
+}
+
+
+class ProductCard extends PureComponent<IProductCardProps, IProductCardState> {
+  constructor(props : IProductCardProps){
     super(props);
 
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.wrapperRef = null;
   }
+
+  wrapperRef: HTMLDivElement | null;
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
@@ -44,23 +58,23 @@ class ProductCard extends PureComponent {
   /**
    * Set the wrapper ref
    */
-  setWrapperRef(node) {
-    this.wrapperRef = node;
+  setWrapperRef(node : HTMLDivElement | null) : void{
+    this.wrapperRef= node;
   }
 
   /**
    * Alert if clicked on outside of element
    */
-  handleClickOutside(event) {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+  handleClickOutside(event : Event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target as Node)) {
       this.props.onUnselected();
     }
   }
 
   updateDimensions() {
     let x = window.matchMedia("(max-width: 1000px)");
-    const photo = document.querySelectorAll('.product-card__photo');
-    const pc = document.querySelector('.product-card__photo-container');
+    const photo = document.querySelectorAll('.product-card__photo') as NodeListOf<HTMLElement>;
+    const pc = document.querySelector('.product-card__photo-container') as HTMLElement;
   
     if (x.matches){
       // shoeBackgroundの新しいheight計算
@@ -97,11 +111,11 @@ class ProductCard extends PureComponent {
             <div className="product-card__color-container">
               <h3 className="product-card__title">Color</h3>
               <div className="product-card__colors">
-                <span className="product-card__color" primary="#2175f5" color="blue"></span>
-                <span className="product-card__color" primary="#f84848" color="red"></span>
-                <span className="product-card__color" primary="#29b864" color="green"></span>
-                <span className="product-card__color" primary="#ff5521" color="orange"></span>
-                <span className="product-card__color" primary="#444" color="black"></span>
+                <span className="product-card__color" color="blue"></span>
+                <span className="product-card__color" color="red"></span>
+                <span className="product-card__color" color="green"></span>
+                <span className="product-card__color" color="orange"></span>
+                <span className="product-card__color" color="black"></span>
               </div>
             </div>
             <div className="product-card__size-container">

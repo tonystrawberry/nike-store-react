@@ -3,12 +3,14 @@ import {
   UNSELECT_PRODUCT
 } from './constants';
 
-const initialStateOverview = {
+import { State, Action } from '../types'
+
+const initialStateOverview : State = {
   selected: false,
   selectedProductId: null
 }
 
-export const selectProduct = (state=initialStateOverview, action={}) => {
+export const selectProduct = (state: State = initialStateOverview, action: Action = {type: '', payload: null} ) => {
   switch (action.type) {
     case SELECT_PRODUCT:
       return Object.assign({}, state, {selected: true, selectedProductId: action.payload})

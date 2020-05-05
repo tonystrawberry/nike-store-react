@@ -15,6 +15,7 @@ exports[`expect to render 1 ProductCartd component 1`] = `
 >
   <Connect(ProductOverviewContainer)>
     <ProductOverviewContainer
+      dispatch={[Function]}
       selected={true}
       selectedProductId={1}
     >

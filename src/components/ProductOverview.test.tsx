@@ -1,18 +1,16 @@
 import { mount, shallow } from 'enzyme';
-import ProductOverview from '../components/ProductOverview';
+import ProductOverview from './ProductOverview';
 import React, { Suspense } from 'react';
 import configureStore from 'redux-mock-store';
 import toJson from 'enzyme-to-json';
 import { Provider } from 'react-redux';
-import renderer from 'react-test-renderer';
-import { selectProduct } from '../redux/actions'
 
 
 const mockStore = configureStore([]);
 
 it ('expect to render ProductOverview component', () => {
   let store = mockStore({});
-  let wrapper = mount(<ProductOverview store={store}/>);
+  let wrapper = mount(<Provider store={store}><ProductOverview /></Provider>);
 
   expect(toJson(wrapper)).toMatchSnapshot();
 })

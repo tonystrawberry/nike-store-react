@@ -4,24 +4,28 @@ import { connect } from 'react-redux';
 import ProductOverview from '../components/ProductOverview';
 import Loading from '../components/Loading';
 
+import { State } from '../types';
+
 import './ProductOverviewContainer.css';
 
 const ProductCardLazy = React.lazy(() => import('../components/ProductCard'));
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: { selectProduct : State }) => {
   return {
     selected: state.selectProduct.selected,
     selectedProductId: state.selectProduct.selectedProductId
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    
-  }
+interface IProductOverviewContainerProps {
+  selected: boolean
 }
 
-class ProductOverviewContainer extends PureComponent {
+interface IProductOverviewContainerState {
+  
+}
+
+class ProductOverviewContainer extends PureComponent<IProductOverviewContainerProps, IProductOverviewContainerState> {
 
   render() {
     return (
@@ -37,7 +41,7 @@ class ProductOverviewContainer extends PureComponent {
           </React.Fragment>
           :
           <Suspense fallback={<Loading />}>
-            <ProductCardLazy />
+            <ProductCardLazy new={false} />
           </Suspense>
         }
       </div>
@@ -45,4 +49,4 @@ class ProductOverviewContainer extends PureComponent {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductOverviewContainer);
+export default connect(mapStateToProps)(ProductOverviewContainer);

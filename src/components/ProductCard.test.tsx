@@ -1,5 +1,5 @@
-import { mount, shallow } from 'enzyme';
-import ProductCard from '../components/ProductCard';
+import { mount, shallow, ReactWrapper } from 'enzyme';
+import ProductCard from './ProductCard';
 import { Provider } from 'react-redux';
 import React, { Suspense } from 'react';
 import configureStore from 'redux-mock-store';
@@ -54,7 +54,7 @@ it('should call removeEventListener in componentWillUnmount', () => {
   const windowRemoveListener = jest.spyOn(window, 'removeEventListener');
   
   let store = mockStore({});
-  let wrapper = mount(<ProductCard store={store}/>);
+  let wrapper = mount(<Provider store={store}><ProductCard new={true} /></Provider>);
   wrapper.unmount(); // Calls for componentWillUnmount
 
   expect(documentRemoveListener).toBeCalled();
@@ -78,7 +78,7 @@ it ('expect to render ProductCard component with matchMedia => true', () => {
   });
 
   let store = mockStore({});
-  let wrapper = mount(<ProductCard store={store}/>);
+  let wrapper = mount(<Provider store={store}><ProductCard new={true} /></Provider>);
 
   expect(toJson(wrapper)).toMatchSnapshot();
 })
@@ -99,7 +99,7 @@ it ('expect to render ProductCard component with matchMedia => false', () => {
   });
 
   let store = mockStore({});
-  let wrapper = mount(<Provider store={store}><ProductCard /></Provider>);
+  let wrapper = mount(<Provider store={store}><ProductCard new={true} /></Provider>);
 
   expect(toJson(wrapper)).toMatchSnapshot();
 })
@@ -119,10 +119,10 @@ it ('handle clicks outside the component', () => {
     })),
   });
 
-  let wrapper;
+  let wrapper : ReactWrapper <any, any>;
 
-  const mapDocument = {};
-  document.addEventListener = jest.fn((event, cb) => {
+  const mapDocument : any = {};
+  document.addEventListener = jest.fn((event, cb : {( target : object ): void}) => {
     mapDocument[event] = () => {
       cb({ target: wrapper.find(".outside").last().getDOMNode() })
     };
@@ -133,7 +133,7 @@ it ('handle clicks outside the component', () => {
   let store = mockStore({});
   wrapper = mount(
     <div> 
-      <Provider store={store}><ProductCard /></Provider>
+      <Provider store={store}><ProductCard new={true} /></Provider>
       <div className="outside"></div>
     </div>
   );
@@ -158,10 +158,10 @@ it ('handle clicks inside the component', () => {
     })),
   });
 
-  let wrapper;
+  let wrapper : ReactWrapper <any, any>;
 
-  const mapDocument = {};
-  document.addEventListener = jest.fn((event, cb) => {
+  const mapDocument : any = {};
+  document.addEventListener = jest.fn((event, cb : {( target : object ): void}) => {
     mapDocument[event] = () => {
       cb({ target: wrapper.find(".product-card__container").last().getDOMNode() })
     };
@@ -172,17 +172,17 @@ it ('handle clicks inside the component', () => {
   let store = mockStore({});
   wrapper = mount(
     <div> 
-      <Provider store={store}><ProductCard /></Provider>
+      <Provider store={store}><ProductCard new={true} /></Provider>
       <div className="outside"></div>
     </div>
   );
 
   expect(documentAddListener).toBeCalled();
 
-  mapDocument.mousedown()
+  mapDocument['mousedown']()
 })
 
-it ('should show new class on new props', () => {
+it ('should show new class on new = true props', () => {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: jest.fn().mockImplementation(query => ({
@@ -198,9 +198,30 @@ it ('should show new class on new props', () => {
   });
 
   let store = mockStore({});
-  let wrapper = mount(<ProductCard store={store} new={true} />);
+  let wrapper = mount(<Provider store={store}><ProductCard new={true} /></Provider>);
 
   expect(wrapper.find('.new').length).toBe(1)
+})
+
+it ('should not show new class on new = false props', () => {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(), // deprecated
+      removeListener: jest.fn(), // deprecated
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  });
+
+  let store = mockStore({});
+  let wrapper = mount(<Provider store={store}><ProductCard new={false} /></Provider>);
+
+  expect(wrapper.find('.new').length).toBe(0)
 })
 
 

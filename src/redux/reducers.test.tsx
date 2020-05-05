@@ -3,29 +3,32 @@ import {
   UNSELECT_PRODUCT
 } from './constants';
 
+import { State } from '../types'
 import * as reducers from './reducers';
 
 describe('selectProduct', () => {
 
-  const initialState = {
+  const initialState: State = {
     selected: false,
     selectedProductId: null
   }
 
-  const stateSelected = {
+  const stateSelected: State = {
     selected: true,
     selectedProductId: 1
   }
 
-  it ('should return the initial state', () => {
-    expect(reducers.selectProduct(undefined, {})).toEqual({
+  it('should return default state on null', () => {
+    expect(reducers.selectProduct()).toEqual({
       selected: false,
       selectedProductId: null
     })
   })
 
-  it ('should return the initial state without parameters', () => {
-    expect(reducers.selectProduct()).toEqual({
+  it('should handle unknown action', () => {
+    expect(reducers.selectProduct(initialState, {
+      type: 'UNKNOWN_ACTION', payload: null
+    })).toEqual({
       selected: false,
       selectedProductId: null
     })

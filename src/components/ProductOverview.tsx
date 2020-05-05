@@ -1,24 +1,33 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { selectProduct } from '../redux/actions';
+import { Dispatch } from 'redux';
 
 import NikeAirForceSmall from '../assets/nike_airforce-small.jpg';
 
 import './ProductOverview.css';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
   return {
 
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+interface IProductOverviewProps {
+  onSelected: {( productId : number): void}
+}
+
+interface IProductOverviewState {
+  
+}
+
+const mapDispatchToProps = (dispatch : Dispatch) => {
   return {
-    onSelected: (productId) => dispatch(selectProduct(productId))
+    onSelected: (productId : number) => dispatch(selectProduct(productId))
   }
 }
 
-class ProductOverview extends PureComponent {
+class ProductOverview extends PureComponent<IProductOverviewProps, IProductOverviewState> {
   render() {
     return (
       <div className="product-overview" onClick={() => this.props.onSelected(1)}>

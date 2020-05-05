@@ -4,14 +4,23 @@
   "private": true,
   "homepage": "http://tonystrawberry.github.io/nike-store-react",
   "jest":{
-    "coveragePathIgnorePatterns": ["<rootDir>/src/api", "src/index.js", "src/serviceWorker.js"],
-    "collectCoverageFrom": ["src/**/*.{js,jsx}"],
+    "coveragePathIgnorePatterns": ["<rootDir>/src/api", "src/index.js", "src/serviceWorker.js", "src/react-app-env.d.ts"],
+    "collectCoverageFrom": ["src/**/*.{js,jsx,ts,tsx}"],
     "coverageReporters": ["lcov"]
   },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/enzyme": "^3.10.5",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "@types/react-redux": "^7.1.8",
+    "@types/react-test-renderer": "^16.9.2",
+    "@types/redux-logger": "^3.0.7",
+    "@types/redux-mock-store": "^1.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -19,7 +28,9 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
