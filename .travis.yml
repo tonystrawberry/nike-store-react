@@ -1,3 +1,5 @@
+notifications:
+  slack: strawberrycookies:9HWTLNINDZ3S1NqttAMUtkSK
 language: node_js
 node_js:
   - 10
