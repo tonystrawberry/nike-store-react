@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import logo from '../assets/nike_logo.svg';
 import './Header.css';
 

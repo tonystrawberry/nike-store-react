@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { unselectProduct } from '../redux/actions';
 import { Dispatch } from 'redux';
 
-
 import './ProductOverview.css';
 import './ProductCard.css';
 import Logo from '../assets/nike_logo.svg';

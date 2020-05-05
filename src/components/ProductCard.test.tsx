@@ -1,7 +1,7 @@
-import { mount, shallow, ReactWrapper } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import ProductCard from './ProductCard';
 import { Provider } from 'react-redux';
-import React, { Suspense } from 'react';
+import React from 'react';
 import configureStore from 'redux-mock-store';
 import toJson from 'enzyme-to-json';
 

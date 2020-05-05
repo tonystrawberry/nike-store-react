@@ -1,4 +1,3 @@
-import { apiCall } from '../api/api'
 import {
   SELECT_PRODUCT,
   UNSELECT_PRODUCT

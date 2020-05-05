@@ -1,6 +1,6 @@
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import ProductOverview from './ProductOverview';
-import React, { Suspense } from 'react';
+import React from 'react';
 import configureStore from 'redux-mock-store';
 import toJson from 'enzyme-to-json';
 import { Provider } from 'react-redux';

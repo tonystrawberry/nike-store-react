@@ -1,4 +1,4 @@
-import React, { PureComponent, lazy, Suspense } from 'react';
+import React, { PureComponent, Suspense } from 'react';
 import { connect } from 'react-redux';
 
 import ProductOverview from '../components/ProductOverview';
