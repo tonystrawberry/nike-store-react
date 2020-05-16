@@ -90,7 +90,7 @@ class ProductCard extends PureComponent<IProductCardProps, IProductCardState> {
         <div className="product-card__card">
           <div className="product-card__photo-container">
             <img src={Logo} alt="Nike Logo" className="product-card__logo" />
-            <a href="#" className="product-card__share"><i className="fas fa-share-alt"></i></a>
+            <a href="/" className="product-card__share"><i className="fas fa-share-alt"></i></a>
             <img src={NikeAirForceMedium} 
               srcSet={`${NikeAirForceMedium} 432w, ${NikeAirForceLarge} 864w`} 
               sizes='(max-width: 500px) 432px, 864px'
@@ -128,7 +128,7 @@ class ProductCard extends PureComponent<IProductCardProps, IProductCardState> {
               </div>
             </div>
             <div className="product-card__buy-price">
-              <a href="#" className="product-card__buy"><i className="fas fa-shopping-cart"></i>Add to cart</a>
+              <a href="/" className="product-card__buy"><i className="fas fa-shopping-cart"></i>Add to cart</a>
               <div className="product-card__price">
                 <i className="fas fa-yen-sign"></i>
                 <h1>21,000</h1>

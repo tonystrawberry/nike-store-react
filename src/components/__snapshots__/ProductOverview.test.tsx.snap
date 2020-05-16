@@ -27,8 +27,8 @@ exports[`expect to render ProductOverview component 1`] = `
           <img
             alt="Nike Air Force"
             className="product-photo"
-            src="nike_airforce-small.jpg"
-            srcSet="nike_airforce-small.jpg 216w"
+            src="nike_airforce-medium.jpg"
+            srcSet="nike_airforce-medium.jpg 216w"
           />
         </div>
         <div

@@ -36,7 +36,7 @@ exports[`expect to render ProductCard component with matchMedia => false 1`] = `
             />
             <a
               className="product-card__share"
-              href="#"
+              href="/"
             >
               <i
                 className="fas fa-share-alt"
@@ -159,7 +159,7 @@ exports[`expect to render ProductCard component with matchMedia => false 1`] = `
             >
               <a
                 className="product-card__buy"
-                href="#"
+                href="/"
               >
                 <i
                   className="fas fa-shopping-cart"
@@ -221,7 +221,7 @@ exports[`expect to render ProductCard component with matchMedia => true 1`] = `
             />
             <a
               className="product-card__share"
-              href="#"
+              href="/"
             >
               <i
                 className="fas fa-share-alt"
@@ -344,7 +344,7 @@ exports[`expect to render ProductCard component with matchMedia => true 1`] = `
             >
               <a
                 className="product-card__buy"
-                href="#"
+                href="/"
               >
                 <i
                   className="fas fa-shopping-cart"
