@@ -2,7 +2,6 @@
   "name": "nike-store-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://tonystrawberry.github.io/nike-store-react",
   "jest": {
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/api",
