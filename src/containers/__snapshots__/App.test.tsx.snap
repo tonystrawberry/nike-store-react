@@ -2,7 +2,19 @@
 
 exports[`expect to render App component 1`] = `
 <div>
-  <Header />
-  <Connect(ProductOverviewContainer) />
+  <BrowserRouter>
+    <Switch>
+      <Route
+        exact={true}
+        path="/"
+      >
+        <Header />
+        <Connect(ProductOverviewContainer) />
+      </Route>
+      <Route
+        render={[Function]}
+      />
+    </Switch>
+  </BrowserRouter>
 </div>
 `;
