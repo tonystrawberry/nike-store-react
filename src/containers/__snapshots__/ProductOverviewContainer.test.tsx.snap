@@ -1,5 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`expect to render 1 ProductCart component on selected: true 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(ProductOverviewContainer)>
+    <ProductOverviewContainer
+      fetchProducts={[Function]}
+      fetchProductsError={[Function]}
+      fetchProductsSuccess={[Function]}
+      loading={false}
+      products={Array []}
+      selected={true}
+    >
+      <div
+        className="product-overview__container product-selected"
+      >
+        <Suspense
+          fallback={<Loading />}
+        >
+          <Loading>
+            <div>
+              <img
+                alt="Loading"
+                src="loading.gif"
+                width="50"
+              />
+            </div>
+          </Loading>
+        </Suspense>
+      </div>
+    </ProductOverviewContainer>
+  </Connect(ProductOverviewContainer)>
+</Provider>
+`;
+
 exports[`expect to render 1 ProductCartd component 1`] = `
 <Provider
   store={

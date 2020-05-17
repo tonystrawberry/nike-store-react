@@ -33,7 +33,7 @@ let store;
 beforeEach(() => {
 })
 
-it ('expect to render 6 ProductOverview components', () => {
+it ('expect to render 0 ProductOverview components on 0 products', () => {
   store = mockStore(initialStateSelectedFalse);
   wrapper = mount(<Provider store={store}><ProductOverviewContainer /></Provider>);
 
@@ -43,7 +43,7 @@ it ('expect to render 6 ProductOverview components', () => {
 })
 
 
-it ('expect to render 1 ProductCartd component', async() => {
+it ('expect to render 1 ProductCart component on selected: true', async() => {
   store = mockStore(initialStateSelectedTrue);
   wrapper = mount(<Provider store={store}>
       <ProductOverviewContainer />
@@ -51,6 +51,15 @@ it ('expect to render 1 ProductCartd component', async() => {
 
   expect(wrapper.find(ProductOverview).length).toEqual(0)
   expect(toJson(wrapper)).toMatchSnapshot()
+})
+
+it ('expect fetchShopProducts() to call dispatch', async() => {
+  store = mockStore(initialStateSelectedTrue);
+  wrapper = mount(<Provider store={store}>
+      <ProductOverviewContainer />
+  </Provider>);
+
+  // TO DO
 })
 
 
