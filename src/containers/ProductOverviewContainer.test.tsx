@@ -53,15 +53,6 @@ it ('expect to render 1 ProductCart component on selected: true', async() => {
   expect(toJson(wrapper)).toMatchSnapshot()
 })
 
-it ('expect fetchShopProducts() to call dispatch', async() => {
-  store = mockStore(initialStateSelectedTrue);
-  wrapper = mount(<Provider store={store}>
-      <ProductOverviewContainer />
-  </Provider>);
-
-  // TO DO
-})
-
 
 
 
