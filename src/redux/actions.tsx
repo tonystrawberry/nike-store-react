@@ -8,7 +8,7 @@ import {
 
 import { Product } from '../types'
 
-export const selectProduct = (productId : number) => ({ type: SELECT_PRODUCT, payload: productId })
+export const selectProduct = (productId : string) => ({ type: SELECT_PRODUCT, payload: productId })
 export const unselectProduct = () => ({ type: UNSELECT_PRODUCT, payload: null })
 export const fetchProducts = () => ({ type: FETCH_PRODUCTS, payload: null })
 export const fetchProductsSuccess = (products: Product[]) => ({ type: FETCH_PRODUCTS_SUCCESS, payload: products })

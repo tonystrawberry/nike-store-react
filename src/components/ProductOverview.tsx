@@ -15,7 +15,7 @@ const mapStateToProps = () => {
 }
 
 interface IProductOverviewProps {
-  onSelected: {( productId : number): void},
+  onSelected: {( productId : string): void},
   product: Product
 }
 
@@ -25,7 +25,7 @@ interface IProductOverviewState {
 
 const mapDispatchToProps = (dispatch : Dispatch) => {
   return {
-    onSelected: (productId : number) => dispatch(selectProduct(productId))
+    onSelected: (productId : string) => dispatch(selectProduct(productId))
   }
 }
 
