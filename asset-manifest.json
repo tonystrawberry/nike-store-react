@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.18f92e36.chunk.css",
+    "main.js": "/static/js/main.be024832.chunk.js",
+    "main.js.map": "/static/js/main.be024832.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.b564fb27.js",
+    "runtime-main.js.map": "/static/js/runtime-main.b564fb27.js.map",
+    "static/js/2.6082e4e3.chunk.js": "/static/js/2.6082e4e3.chunk.js",
+    "static/js/2.6082e4e3.chunk.js.map": "/static/js/2.6082e4e3.chunk.js.map",
+    "static/css/3.ea37b057.chunk.css": "/static/css/3.ea37b057.chunk.css",
+    "static/js/3.e78d998b.chunk.js": "/static/js/3.e78d998b.chunk.js",
+    "static/js/3.e78d998b.chunk.js.map": "/static/js/3.e78d998b.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.ecb278037068577800238f6c41fc8ca7.js": "/precache-manifest.ecb278037068577800238f6c41fc8ca7.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/3.ea37b057.chunk.css.map": "/static/css/3.ea37b057.chunk.css.map",
+    "static/css/main.18f92e36.chunk.css.map": "/static/css/main.18f92e36.chunk.css.map",
+    "static/js/2.6082e4e3.chunk.js.LICENSE.txt": "/static/js/2.6082e4e3.chunk.js.LICENSE.txt",
+    "static/media/loading.gif": "/static/media/loading.ae765ba3.gif",
+    "static/media/nike_airforce-large.jpg": "/static/media/nike_airforce-large.118961ea.jpg",
+    "static/media/nike_airforce-medium.jpg": "/static/media/nike_airforce-medium.1768a94b.jpg",
+    "static/media/nike_logo.svg": "/static/media/nike_logo.4c58725d.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b564fb27.js",
+    "static/js/2.6082e4e3.chunk.js",
+    "static/css/main.18f92e36.chunk.css",
+    "static/js/main.be024832.chunk.js"
+  ]
+}
