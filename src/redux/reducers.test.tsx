@@ -10,12 +10,16 @@ describe('selectProduct', () => {
 
   const initialState: State = {
     selected: false,
-    selectedProductId: null
+    selectedProductId: null,
+    products: [],
+    loading: false
   }
 
   const stateSelected: State = {
     selected: true,
-    selectedProductId: 1
+    selectedProductId: 1,
+    products: [],
+    loading: false
   }
 
   it('should return default state on null', () => {

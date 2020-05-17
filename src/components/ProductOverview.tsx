@@ -6,6 +6,7 @@ import { Dispatch } from 'redux';
 import NikeAirForceMedium from '../assets/nike_airforce-medium.jpg';
 
 import './ProductOverview.css';
+import { Product } from '../types';
 
 const mapStateToProps = () => {
   return {
@@ -14,7 +15,8 @@ const mapStateToProps = () => {
 }
 
 interface IProductOverviewProps {
-  onSelected: {( productId : number): void}
+  onSelected: {( productId : number): void},
+  product: Product
 }
 
 interface IProductOverviewState {
@@ -32,12 +34,12 @@ class ProductOverview extends PureComponent<IProductOverviewProps, IProductOverv
     return (
       <div className="product-overview" onClick={() => this.props.onSelected(1)}>
         <div className="product-photo__container">
-          <img className="product-photo" src={NikeAirForceMedium} srcSet={`${NikeAirForceMedium} 216w`} alt="Nike Air Force"></img>
+          <img className="product-photo" src={this.props.product.imageUrl} alt="Nike Air Force"></img>
         </div>
         <div className="product-overview__info">
-          <h1 className="product-overview__title">Nike Air Force 1</h1>
-          <div className="product-overview__type">Men's Shoe</div>
-          <div className="product-overview__type">2 Colors</div>
+          <h1 className="product-overview__title">{this.props.product.title}</h1>
+          <div className="product-overview__type">{this.props.product.subtitle1}</div>
+          <div className="product-overview__type">{this.props.product.subtitle2}</div>
         </div>
       </div>
     );
