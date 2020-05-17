@@ -11,6 +11,7 @@ export type Action = {
 }
 
 export type Product = {
+  _id: string,
   title: string,
   subtitle1: string,
   subtitle2: string,

@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch : Dispatch) => {
 class ProductOverview extends PureComponent<IProductOverviewProps, IProductOverviewState> {
   render() {
     return (
-      <div className="product-overview" onClick={() => this.props.onSelected(1)}>
+      <div className="product-overview" onClick={() => this.props.onSelected(this.props.product._id)}>
         <div className="product-photo__container">
           <img className="product-photo" src={this.props.product.imageUrl} alt="Nike Air Force"></img>
         </div>

@@ -13,9 +13,30 @@ exports[`expect to render ProductOverview component 1`] = `
     }
   }
 >
-  <Connect(ProductOverview)>
+  <Connect(ProductOverview)
+    product={
+      Object {
+        "_id": "12345",
+        "imageUrl": "img.jpg",
+        "price": 23443,
+        "subtitle1": "sub1",
+        "subtitle2": "sub2",
+        "title": "Title",
+      }
+    }
+  >
     <ProductOverview
       onSelected={[Function]}
+      product={
+        Object {
+          "_id": "12345",
+          "imageUrl": "img.jpg",
+          "price": 23443,
+          "subtitle1": "sub1",
+          "subtitle2": "sub2",
+          "title": "Title",
+        }
+      }
     >
       <div
         className="product-overview"
@@ -27,8 +48,7 @@ exports[`expect to render ProductOverview component 1`] = `
           <img
             alt="Nike Air Force"
             className="product-photo"
-            src="nike_airforce-medium.jpg"
-            srcSet="nike_airforce-medium.jpg 216w"
+            src="img.jpg"
           />
         </div>
         <div
@@ -37,17 +57,17 @@ exports[`expect to render ProductOverview component 1`] = `
           <h1
             className="product-overview__title"
           >
-            Nike Air Force 1
+            Title
           </h1>
           <div
             className="product-overview__type"
           >
-            Men's Shoe
+            sub1
           </div>
           <div
             className="product-overview__type"
           >
-            2 Colors
+            sub2
           </div>
         </div>
       </div>

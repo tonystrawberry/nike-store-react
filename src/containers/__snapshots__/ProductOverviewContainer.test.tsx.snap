@@ -15,9 +15,12 @@ exports[`expect to render 1 ProductCartd component 1`] = `
 >
   <Connect(ProductOverviewContainer)>
     <ProductOverviewContainer
-      dispatch={[Function]}
+      fetchProducts={[Function]}
+      fetchProductsError={[Function]}
+      fetchProductsSuccess={[Function]}
+      loading={false}
+      products={Array []}
       selected={true}
-      selectedProductId={1}
     >
       <div
         className="product-overview__container product-selected"
@@ -26,7 +29,13 @@ exports[`expect to render 1 ProductCartd component 1`] = `
           fallback={<Loading />}
         >
           <Loading>
-            <div />
+            <div>
+              <img
+                alt="Loading"
+                src="loading.gif"
+                width="50"
+              />
+            </div>
           </Loading>
         </Suspense>
       </div>

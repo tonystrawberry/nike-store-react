@@ -11,14 +11,18 @@ import { Provider } from 'react-redux';
 var initialStateSelectedFalse = {
   selectProduct: {
     selected: false,
-    selectedProductId: null
+    selectedProductId: null,
+    products: [],
+    loading: false
   }
 }
 
 var initialStateSelectedTrue = {
   selectProduct: {
     selected: true,
-    selectedProductId: 1
+    selectedProductId: 1,
+    products: [],
+    loading: false
   }
 }
 
@@ -33,7 +37,7 @@ it ('expect to render 6 ProductOverview components', () => {
   store = mockStore(initialStateSelectedFalse);
   wrapper = mount(<Provider store={store}><ProductOverviewContainer /></Provider>);
 
-  expect(wrapper.find(ProductOverview).length).toEqual(6)
+  expect(wrapper.find(ProductOverview).length).toEqual(0)
   expect(wrapper.find(ProductCard).length).toEqual(0)
 
 })

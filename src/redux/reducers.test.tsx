@@ -23,36 +23,36 @@ describe('selectProduct', () => {
   }
 
   it('should return default state on null', () => {
-    expect(reducers.selectProduct()).toEqual({
+    expect(reducers.selectProduct()).toEqual(expect.objectContaining({
       selected: false,
       selectedProductId: null
-    })
+    }))
   })
 
   it('should handle unknown action', () => {
     expect(reducers.selectProduct(initialState, {
       type: 'UNKNOWN_ACTION', payload: null
-    })).toEqual({
+    })).toEqual(expect.objectContaining({
       selected: false,
       selectedProductId: null
-    })
+    }))
   })
 
   it('should handle SELECT_PRODUCT', () => {
     expect(reducers.selectProduct(initialState, {
       type: SELECT_PRODUCT, payload: 1
-    })).toEqual({
+    })).toEqual(expect.objectContaining({
       selected: true,
       selectedProductId: 1
-    })
+    }))
   })
 
   it('should handle UNSELECT_PRODUCT', () => {
     expect(reducers.selectProduct(stateSelected, {
       type: UNSELECT_PRODUCT, payload: null
-    })).toEqual({
+    })).toEqual(expect.objectContaining({
       selected: false,
       selectedProductId: null
-    })
+    }))
   })
 })
