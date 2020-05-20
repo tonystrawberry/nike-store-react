@@ -6,34 +6,34 @@ import {
   FETCH_PRODUCTS_ERROR
 } from './constants';
 
-import { State } from '../types'
-import * as reducers from './reducers';
+import { ProductOverviewState } from '../types'
+import * as reducers from './productOverview';
 
 describe('selectProduct', () => {
 
-  const initialState: State = {
+  const initialState: ProductOverviewState = {
     selected: false,
     selectedProductId: null,
     products: [],
     loading: false
   }
 
-  const stateSelected: State = {
+  const stateSelected: ProductOverviewState = {
     selected: true,
-    selectedProductId: 1,
+    selectedProductId: "1",
     products: [],
     loading: false
   }
 
   it('should return default state on null', () => {
-    expect(reducers.selectProduct()).toEqual(expect.objectContaining({
+    expect(reducers.productOverview()).toEqual(expect.objectContaining({
       selected: false,
       selectedProductId: null
     }))
   })
 
   it('should handle unknown action', () => {
-    expect(reducers.selectProduct(initialState, {
+    expect(reducers.productOverview(initialState, {
       type: 'UNKNOWN_ACTION', payload: null
     })).toEqual(expect.objectContaining({
       selected: false,
@@ -42,7 +42,7 @@ describe('selectProduct', () => {
   })
 
   it('should handle SELECT_PRODUCT', () => {
-    expect(reducers.selectProduct(initialState, {
+    expect(reducers.productOverview(initialState, {
       type: SELECT_PRODUCT, payload: 1
     })).toEqual(expect.objectContaining({
       selected: true,
@@ -51,7 +51,7 @@ describe('selectProduct', () => {
   })
 
   it('should handle UNSELECT_PRODUCT', () => {
-    expect(reducers.selectProduct(stateSelected, {
+    expect(reducers.productOverview(stateSelected, {
       type: UNSELECT_PRODUCT, payload: null
     })).toEqual(expect.objectContaining({
       selected: false,
@@ -60,7 +60,7 @@ describe('selectProduct', () => {
   })
 
   it('should handle FETCH_PRODUCTS', () => {
-    expect(reducers.selectProduct(stateSelected, {
+    expect(reducers.productOverview(stateSelected, {
       type: FETCH_PRODUCTS, payload: null
     })).toEqual(expect.objectContaining({
       loading: true
@@ -68,7 +68,7 @@ describe('selectProduct', () => {
   })
 
   it('should handle FETCH_PRODUCTS_SUCCESS', () => {
-    expect(reducers.selectProduct(stateSelected, {
+    expect(reducers.productOverview(stateSelected, {
       type: FETCH_PRODUCTS_SUCCESS, payload: [{title: "Nike"}]
     })).toEqual(expect.objectContaining({
       loading: false,
@@ -77,7 +77,7 @@ describe('selectProduct', () => {
   })
 
   it('should handle FETCH_PRODUCTS_ERROR', () => {
-    expect(reducers.selectProduct(stateSelected, {
+    expect(reducers.productOverview(stateSelected, {
       type: FETCH_PRODUCTS_ERROR, payload: null
     })).toEqual(expect.objectContaining({
       loading: false,

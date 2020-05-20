@@ -7,14 +7,15 @@ import { createLogger } from 'redux-logger';
 
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
-import { selectProduct } from './redux/reducers';
+import { productOverview } from './redux/productOverview';
+import { admin } from './redux/admin';
 
 import './index.css';
 import './normalize.css';
 
 const logger = createLogger()
 
-const rootReducers = combineReducers({selectProduct})
+const rootReducers = combineReducers({productOverview, admin})
 
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger))
 

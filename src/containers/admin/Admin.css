@@ -1,0 +1,76 @@
+.admin__container {
+  position: relative;
+  margin-top: 80px;
+  width: 100%;
+  display: flex;
+  flex: 1 1 0%;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+
+.admin__sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 350px;
+  box-shadow: inset -1px 0 #e5e5e5;
+}
+
+.admin__avatar-container {
+  padding:20px;
+}
+
+.admin__avatar-container img {
+  width: 70px;
+  height: 70px;
+}
+
+.admin__menu-container{
+  width: 100%;
+}
+
+.admin__menu-container ul{
+  padding: 0;
+  list-style-type: none;
+  
+}
+
+.admin__menu-container li:first-child a{
+  box-shadow: inset 0 1px #e5e5e5, inset -1px 0 #e5e5e5;
+}
+
+.admin__menu-container li{
+}
+
+.admin__menu-container li a {
+  background-color: #fefefe;
+  letter-spacing: 1px;
+  box-shadow: inset 0 -1px #e5e5e5, inset 0 1px #e5e5e5, inset -1px 0 #e5e5e5;
+  transition: opacity 100ms linear;
+
+  display: block;
+  padding: 20px 20px;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.admin__menu-container li a.active{
+  background-color: #fbfbfb;
+}
+
+.admin__menu-container li a:hover{
+  cursor: pointer;
+  background-color: #fbfbfb;
+  color: gray;
+}
+
+
+
+.admin__main{
+  flex: 1;
+}
+
+
+

@@ -1,8 +1,26 @@
-export type State = {
+export type ProductOverviewState = {
   selected: boolean,
-  selectedProductId: number | null,
+  selectedProductId: string | null,
   products: Product[],
   loading: boolean
+}
+
+export type AdminProfile = {
+  fullName: string,
+  username: string,
+  email: string,
+  password: string
+}
+
+export type AdminUser = {
+  email: string,
+  accessToken: string
+}
+
+export type AdminState = {
+  loading: boolean,
+  profile: AdminProfile,
+  user: AdminUser | null
 }
 
 export type Action = {
@@ -15,6 +33,7 @@ export type Product = {
   title: string,
   subtitle1: string,
   subtitle2: string,
+  description: string,
   imageUrl: string,
   price: number
 }

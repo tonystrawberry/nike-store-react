@@ -5,18 +5,19 @@ import { Dispatch } from 'redux';
 import ProductOverview from '../components/ProductOverview';
 import Loading from '../components/Loading';
 
-import { State, Product } from '../types';
+import { ProductOverviewState, Product } from '../types';
 
 import './ProductOverviewContainer.css';
 import { fetchProducts, fetchProductsSuccess, fetchProductsError } from '../redux/actions';
 
 const ProductCardLazy = React.lazy(() => import('../components/ProductCard'));
 
-const mapStateToProps = (state: { selectProduct : State }) => {
+const mapStateToProps = (state: { productOverview : ProductOverviewState }) => {
   return {
-    selected: state.selectProduct.selected,
-    loading: state.selectProduct.loading,
-    products: state.selectProduct.products
+    selected: state.productOverview.selected,
+    loading: state.productOverview.loading,
+    products: state.productOverview.products,
+    selectedProductId: state.productOverview.selectedProductId
   }
 }
 
@@ -31,6 +32,7 @@ interface IProductOverviewContainerProps {
   selected: boolean,
   loading: boolean,
   products: Product[],
+  selectedProductId: string | null,
   fetchProducts: {(): void},
   fetchProductsSuccess: {(products: Product[]): void},
   fetchProductsError: {(): void}
@@ -44,7 +46,6 @@ class ProductOverviewContainer extends PureComponent<IProductOverviewContainerPr
 
   componentDidMount(){
     this.fetchShopProducts()
-
   }
 
   fetchShopProducts(){
@@ -69,6 +70,8 @@ class ProductOverviewContainer extends PureComponent<IProductOverviewContainerPr
       )
     }
 
+    var product = this.props.products.find(product => product._id == this.props.selectedProductId)
+
     return (
       <div className={`product-overview__container ${this.props.selected ? 'product-selected' : ''}`}>
         {!this.props.selected ?
@@ -77,10 +80,13 @@ class ProductOverviewContainer extends PureComponent<IProductOverviewContainerPr
               return <ProductOverview product={product}/>
             })}
           </React.Fragment>
-          :
-          <Suspense fallback={<Loading />}>
-            <ProductCardLazy new={false} />
-          </Suspense>
+          : ( this.props.selectedProductId != null ? 
+            <Suspense fallback={<Loading />}>
+              <ProductCardLazy new={false} product={product}/>
+            </Suspense>
+            :
+            <Loading />
+          )
         }
       </div>
     );

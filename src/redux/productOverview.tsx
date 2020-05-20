@@ -6,16 +6,16 @@ import {
   FETCH_PRODUCTS_ERROR
 } from './constants';
 
-import { State, Action } from '../types'
+import { ProductOverviewState, Action } from '../types'
 
-const initialStateOverview : State = {
+const initialStateOverview : ProductOverviewState = {
   selected: false,
   selectedProductId: null,
   products: [],
   loading: false
 }
 
-export const selectProduct = (state: State = initialStateOverview, action: Action = {type: '', payload: null} ) => {
+export const productOverview = (state: ProductOverviewState = initialStateOverview, action: Action = {type: '', payload: null} ) => {
   switch (action.type) {
     case SELECT_PRODUCT:
       return Object.assign({}, state, {selected: true, selectedProductId: action.payload})

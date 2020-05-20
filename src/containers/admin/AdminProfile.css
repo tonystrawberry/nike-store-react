@@ -1,0 +1,11 @@
+.admin-profile__form {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-profile__form input[type="submit"]{
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}

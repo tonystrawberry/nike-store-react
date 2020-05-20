@@ -8,3 +8,54 @@ body {
 * {
   box-sizing: border-box;
 }
+
+#root {
+  height: 100vh;
+}
+
+input[type="submit"]{
+  
+  text-align: center;
+  padding: .7rem 2rem;
+  background: #111;
+  color: #fff;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: .5s;
+  text-decoration: none;
+  border-radius: 30px;
+  margin-bottom: 10px;
+  border: 1px solid #111;
+  outline: none;
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-group label{
+  font-weight: 600;
+  display: block;
+  min-width: 100px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.form-group input[type="text"], .form-group input[type="password"], .form-group input[type="email"]{
+  width:500px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  height: 3rem;
+  outline: none;
+  padding: 0 10px;
+  letter-spacing: 1px;
+}
+
+input[type="submit"]:hover {
+  color: #111111;
+  background: #fff;
+  border: 1px solid #ececec;
+  cursor: pointer;
+}

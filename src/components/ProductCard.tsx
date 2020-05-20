@@ -8,6 +8,9 @@ import './ProductCard.css';
 import Logo from '../assets/nike_logo.svg';
 import NikeAirForceMedium from '../assets/nike_airforce-medium.jpg';
 import NikeAirForceLarge from '../assets/nike_airforce-large.jpg';
+import { Product } from '../types';
+import Loading from './Loading';
+import { numberToPrice } from '../utils/utils';
 
 
 const mapStateToProps = () => {
@@ -24,7 +27,8 @@ const mapDispatchToProps = (dispatch : Dispatch ) => {
 
 interface IProductCardProps {
   new: boolean,
-  onUnselected: {(): void}
+  onUnselected: {(): void},
+  product: Product | undefined
 }
 
 interface IProductCardState {
@@ -85,29 +89,34 @@ class ProductCard extends PureComponent<IProductCardProps, IProductCardState> {
   }
 
   render() {
+    if (!this.props.product){
+      return (
+        <div className="product-card__container">
+          <Loading />
+        </div>)
+    }
     return (
       <div ref={this.setWrapperRef} className="product-card__container">
         <div className="product-card__card">
           <div className="product-card__photo-container">
             <img src={Logo} alt="Nike Logo" className="product-card__logo" />
             <a href="/" className="product-card__share"><i className="fas fa-share-alt"></i></a>
-            <img src={NikeAirForceMedium} 
-              srcSet={`${NikeAirForceMedium} 432w, ${NikeAirForceLarge} 864w`} 
-              sizes='(max-width: 500px) 432px, 864px'
+            <img src={this.props.product.imageUrl} 
               alt="Product Photography" className="product-card__photo"/>
           </div>
           <div className="product-card__info">
             <div className="product-card__name">
               <div>
-                <h1 className="big">Nike Air Force 1</h1>
+                <h1 className="big">{ this.props.product.title }</h1>
                 {this.props.new ? <span className="new">new</span> : null}
               </div>
-              <h3 className="small">Men's Shoe</h3>
+              <h3 className="small">{ this.props.product.subtitle1 }</h3>
+              <h3 className="small">{ this.props.product.subtitle2 }</h3>
             </div>
             <div className="product-card__description">
-              <p className="product-card__text">The legend lives on in the Nike Air Force 1, which stays true to its roots with iconic AF1 style and Nike Air for all-day comfort and long-lasting wear.</p>
+              <p className="product-card__text">{ this.props.product.description }</p>
             </div>
-            <div className="product-card__color-container">
+            {/* <div className="product-card__color-container">
               <h3 className="product-card__title">Color</h3>
               <div className="product-card__colors">
                 <span className="product-card__color" color="blue"></span>
@@ -126,12 +135,12 @@ class ProductCard extends PureComponent<IProductCardProps, IProductCardState> {
                 <span className="product-card__size">10</span>
                 <span className="product-card__size">11</span>
               </div>
-            </div>
+            </div> */}
             <div className="product-card__buy-price">
               <a href="/" className="product-card__buy"><i className="fas fa-shopping-cart"></i>Add to cart</a>
               <div className="product-card__price">
                 <i className="fas fa-yen-sign"></i>
-                <h1>21,000</h1>
+                <h1>{ numberToPrice(this.props.product.price) }</h1>
               </div>
             </div>
           </div>
