@@ -13,6 +13,8 @@ export type AdminProfile = {
 }
 
 export type AdminUser = {
+  id: string,
+  username: string,
   email: string,
   accessToken: string
 }
@@ -37,3 +39,15 @@ export type Product = {
   imageUrl: string,
   price: number
 }
+
+export type ToastState = {
+  toasts: SingleToast[]
+}
+
+export type SingleToast = {
+  id: number,
+  type: string,
+  message: string
+}
+
+

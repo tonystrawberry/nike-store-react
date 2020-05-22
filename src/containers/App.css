@@ -1,0 +1,7 @@
+.app__container-loading{
+  padding: 30px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

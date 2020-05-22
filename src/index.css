@@ -13,7 +13,7 @@ body {
   height: 100vh;
 }
 
-input[type="submit"]{
+input[type="submit"], .button{
   
   text-align: center;
   padding: .7rem 2rem;
@@ -30,6 +30,31 @@ input[type="submit"]{
   outline: none;
 }
 
+input[type="submit"].-small, .button.-small{
+  padding: .3rem 1rem;
+  font-size: 0.8rem;
+}
+
+input[type="submit"]:hover, .button:hover {
+  color: #111111;
+  background: #fff;
+  border: 1px solid #ececec;
+  cursor: pointer;
+}
+
+.button.-secondary {
+  background: #fff;
+  color: #111;
+  border: 1px solid #111;
+}
+
+.button.-secondary:hover{
+  background: #111;
+  color: #fff;
+  border: 1px solid #111;
+}
+
+
 .form-group {
   margin-bottom: 30px;
 }
@@ -44,18 +69,11 @@ input[type="submit"]{
 }
 
 .form-group input[type="text"], .form-group input[type="password"], .form-group input[type="email"]{
-  width:500px;
+  width: 100%;
   border-radius: 5px;
   border: 1px solid #ccc;
   height: 3rem;
   outline: none;
   padding: 0 10px;
   letter-spacing: 1px;
-}
-
-input[type="submit"]:hover {
-  color: #111111;
-  background: #fff;
-  border: 1px solid #ececec;
-  cursor: pointer;
 }

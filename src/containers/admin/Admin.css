@@ -66,6 +66,12 @@
   color: gray;
 }
 
+.admin__footer-container{
+  text-align: center;
+  width: 100%;
+  padding: 30px 0;
+  margin-top: auto;
+}
 
 
 .admin__main{

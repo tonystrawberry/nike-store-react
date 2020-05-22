@@ -1,9 +1,6 @@
 export function getCurrentUser() {
   const user = localStorage.getItem('user')
-
-  console.log("user", user);
   if (!user) return {}
-
   return JSON.parse(user as string);
 }
 
@@ -19,4 +16,8 @@ export function authHeader(){
   } else {
     return {};
   }
+}
+
+export function logoutUser(){
+  localStorage.removeItem('user')
 }

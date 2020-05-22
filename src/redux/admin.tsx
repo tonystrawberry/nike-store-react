@@ -1,12 +1,13 @@
 import {
   CHANGE_PROFILE_INPUT,
-  AUTH_USER
+  AUTH_USER,
+  LOGOUT_USER
 } from './constants';
 
 import { AdminState, Action, AdminProfile } from '../types'
 
 const initialStateOverview : AdminState = {
-  loading: false,
+  loading: true,
   profile: {
     fullName: '',
     username: '',
@@ -24,7 +25,9 @@ export const admin = (state: AdminState = initialStateOverview, action: Action =
       profile[key] = action.payload.value
       return {...state, profile }
     case AUTH_USER:
-      return {...state, user: action.payload }
+      return {...state, user: action.payload, loading: false }
+    case LOGOUT_USER:
+      return {...state, user: null, loading: false }
     default:
       return state
   }

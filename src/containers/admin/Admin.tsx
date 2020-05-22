@@ -8,9 +8,11 @@ import { AdminState, Product } from '../../types';
 import avatar from '../../assets/avatar.jpg';
 
 import './Admin.css';
-import { Link, useLocation, NavLink, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Link, useLocation, NavLink, BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import AdminProducts from './AdminProducts';
 import AdminProfile from './AdminProfile';
+import { logoutUser } from '../../utils/auth';
+import { logout } from '../../redux/actions';
 
 const mapStateToProps = (state: { admin : AdminState }) => {
   return {
@@ -20,10 +22,12 @@ const mapStateToProps = (state: { admin : AdminState }) => {
 
 const mapDispatchToProps = (dispatch : Dispatch ) => {
   return {
+    logout: () => dispatch(logout())
   }
 }
 interface IAdminProps {
   loading: boolean,
+  logout: {(): void}
 }
 
 interface IAdminState {
@@ -31,6 +35,18 @@ interface IAdminState {
 }
 
 class Admin extends PureComponent<IAdminProps, IAdminState> {
+
+  state = {
+    logout: false
+  }
+
+  onLogout = (e: React.FormEvent) =>{
+    e.preventDefault()
+    logoutUser()
+    this.props.logout()
+    this.setState({logout: true})
+  }
+
 
   render() {
 
@@ -42,6 +58,9 @@ class Admin extends PureComponent<IAdminProps, IAdminState> {
       )
     }
 
+    if (this.state.logout){
+      return <Redirect to='/'/>;
+    }
 
     return (
       <Router>
@@ -57,6 +76,9 @@ class Admin extends PureComponent<IAdminProps, IAdminState> {
                 <li><NavLink to="/admin/profile" activeClassName='active' >PROFILE</NavLink></li>
                 <li><NavLink to="/admin/products" activeClassName='active'>YOUR PRODUCTS</NavLink></li>
               </ul>
+            </div>
+            <div className="admin__footer-container">
+              <button className="button -secondary" onClick={this.onLogout}>Sign out</button>
             </div>
           </div>
           <div className="admin__main">

@@ -15,6 +15,9 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { getCurrentUser } from '../utils/auth';
 import { authUser } from '../redux/actions';
+import Loading from '../components/Loading';
+import Register from './auth/Register';
+import Toast from '../components/Toast';
 
 const mapStateToProps = (state: { admin : AdminState }) => {
   return {
@@ -43,23 +46,34 @@ class App extends Component<IAppProps, IAppState> {
 
   componentDidMount(){
     const user = getCurrentUser()
-    console.log("user", user)
     this.props.authUser(user as AdminUser)
   }
 
+  isConnected(){
+    return this.props.user != null && this.props.user.accessToken != null
+  }
+
   render() {
+    if (this.props.loading){
+      return (
+        <div className="app__container-loading">
+          <Loading />
+        </div>
+      )
+    }
+    
     return (
       <div>
         <Router>
-          <Header />
+          <Toast />
+          <Header user={this.props.user} connected={this.isConnected()} />
           <Switch>
             <Route exact path="/">
               <ProductOverviewContainer />
             </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route path="/admin" render={() => ( this.props.user != null ? <Admin /> : <Redirect to="/" />)} />
+            <Route exact path="/login" render={() => ( this.isConnected() ? <Redirect to="/" /> : <Login />)} />
+            <Route exact path="/register" render={() => ( this.isConnected() ? <Redirect to="/" /> : <Register />)} />
+            <Route path="/admin" render={() => ( this.isConnected() ? <Admin /> : <Redirect to="/" />)} />
             <Route render={() => <Redirect to="/" />} />
           </Switch>
         </Router>

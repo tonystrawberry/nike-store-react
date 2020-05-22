@@ -9,13 +9,14 @@ import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import { productOverview } from './redux/productOverview';
 import { admin } from './redux/admin';
+import { toast } from './redux/toast';
 
 import './index.css';
 import './normalize.css';
 
 const logger = createLogger()
 
-const rootReducers = combineReducers({productOverview, admin})
+const rootReducers = combineReducers({productOverview, admin, toast})
 
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger))
 
