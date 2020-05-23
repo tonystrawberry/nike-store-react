@@ -4,17 +4,17 @@
   color: #ffffff;
   display: flex;
   padding: 16px;
-  background: rgba(57,57,57,0.9);
+  background: rgba(57, 57, 57, 0.9);
   display: flex;
   align-items: center;
-}
 
-.toast img:hover{
-  cursor: pointer;
-}
+  img:hover {
+    cursor: pointer;
+  }
 
-.toast:not(:last-child) {
-  margin: 0 0 12px;
+  &:not(:last-child) {
+    margin: 0 0 12px;
+  }
 }
 
 .toast__content {

@@ -12,6 +12,7 @@ import {
 } from './constants'
 
 import { Product, AdminUser } from '../types'
+import { Dispatch } from 'redux'
 
 export const selectProduct = (productId : string) => ({ type: SELECT_PRODUCT, payload: productId })
 export const unselectProduct = () => ({ type: UNSELECT_PRODUCT, payload: null })
@@ -21,5 +22,15 @@ export const fetchProductsError = () => ({ type: FETCH_PRODUCTS_ERROR, payload: 
 export const onChangeProfileInput = (key: string, value: string) => ({ type: CHANGE_PROFILE_INPUT, payload: { key, value } })
 export const authUser = (user: AdminUser) => ({ type: AUTH_USER, payload: user})
 export const logout = () => ({ type: LOGOUT_USER, payload: null})
-export const showToast = (type: string, message: string) => ({ type: SHOW_TOAST, payload: { type, message }})
+export const showToast = (id: number, type: string, message: string) => ({ type: SHOW_TOAST, payload: { type, message }})
 export const hideToast = (id: number) => ({ type: HIDE_TOAST, payload: { id }})
+
+let nextNotificationId = 0
+export const showNotificationWithTimeout = (dispatch: Dispatch, type: string, text: string) => {
+  const id = nextNotificationId++
+  dispatch(showToast(id, type, text))
+
+  setTimeout(() => {
+    dispatch(hideToast(id))
+  }, 5000)
+}

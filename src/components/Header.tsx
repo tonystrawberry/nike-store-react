@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../assets/nike_logo.svg';
 import admin from '../assets/admin.svg';
-import './Header.css';
+import './Header.scss';
 import { Link } from 'react-router-dom';
 import { AdminUser } from '../types';
 

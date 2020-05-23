@@ -7,8 +7,8 @@ import Loading from '../components/Loading';
 
 import { ProductOverviewState, Product } from '../types';
 
-import './ProductOverviewContainer.css';
-import { fetchProducts, fetchProductsSuccess, fetchProductsError } from '../redux/actions';
+import './ProductOverviewContainer.scss';
+import { fetchProducts, fetchProductsSuccess, fetchProductsError, showNotificationWithTimeout } from '../redux/actions';
 
 const ProductCardLazy = React.lazy(() => import('../components/ProductCard'));
 
@@ -26,6 +26,7 @@ const mapDispatchToProps = (dispatch : Dispatch ) => {
     fetchProducts: () => dispatch(fetchProducts()),
     fetchProductsSuccess: (products: Product[]) => dispatch(fetchProductsSuccess(products)),
     fetchProductsError: () => dispatch(fetchProductsError()),
+    showNotificationWithTimeout: (type: string, message: string) => showNotificationWithTimeout(dispatch, type, message)
   }
 }
 interface IProductOverviewContainerProps {
@@ -35,7 +36,8 @@ interface IProductOverviewContainerProps {
   selectedProductId: string | null,
   fetchProducts: {(): void},
   fetchProductsSuccess: {(products: Product[]): void},
-  fetchProductsError: {(): void}
+  fetchProductsError: {(): void},
+  showNotificationWithTimeout: {(type: string, message: string): void}
 }
 
 interface IProductOverviewContainerState {
@@ -51,13 +53,16 @@ class ProductOverviewContainer extends PureComponent<IProductOverviewContainerPr
   fetchShopProducts(){
     this.props.fetchProducts()
     fetch('/api/products')
-      .then(res => {
-        if (!res.ok) throw new Error(res.statusText)
-        return res.text()
-      })
-      .then((body: any) => {
-        this.props.fetchProductsSuccess(JSON.parse(body))
-      });
+    .then(res => {
+      if (!res.ok) throw new Error(res.statusText)
+      return res.text()
+    })
+    .then((body: any) => {
+      this.props.fetchProductsSuccess(JSON.parse(body))
+    })
+    .catch(error => {
+      this.props.showNotificationWithTimeout('error', 'Products fetch failed. Please refresh the page or login again.')
+    });
   }
 
   render() {

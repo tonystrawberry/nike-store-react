@@ -1,20 +1,20 @@
 export function getCurrentUser() {
   const user = localStorage.getItem('user')
   if (!user) return {}
-  return JSON.parse(user as string);
+  return JSON.parse(user as string)
 }
 
 export function authHeader(){
   const user = localStorage.getItem('user')
-  if (!user) return {}
+  if (!user) return { 'x-access-token': '' }
 
-  const accessToken = JSON.parse(user as string);
+  const userJson = JSON.parse(user as string);
 
-  if (user && accessToken) {
+  if (user && userJson.accessToken) {
     // for Node.js Express back-end
-    return { 'x-access-token': accessToken };
+    return { 'x-access-token': userJson.accessToken }
   } else {
-    return {};
+    return { 'x-access-token': ''}
   }
 }
 

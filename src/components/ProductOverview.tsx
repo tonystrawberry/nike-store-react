@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 
 import NikeAirForceMedium from '../assets/nike_airforce-medium.jpg';
 
-import './ProductOverview.css';
+import './ProductOverview.scss';
 import { Product } from '../types';
 
 const mapStateToProps = () => {

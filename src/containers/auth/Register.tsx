@@ -1,9 +1,9 @@
-import React, { PureComponent, Suspense, Component } from 'react';
+import React, { Component } from 'react';
 
-import './Auth.css';
+import './Auth.scss';
 import { Redirect, Link } from 'react-router-dom';
 import { getCurrentUser } from '../../utils/auth';
-import { authUser } from '../../redux/actions';
+import { authUser, showNotificationWithTimeout } from '../../redux/actions';
 import { Dispatch } from 'redux';
 import { AdminUser } from '../../types';
 import { connect } from 'react-redux';
@@ -11,7 +11,8 @@ import Loading from '../../components/Loading';
 
 const mapDispatchToProps = (dispatch : Dispatch ) => {
   return {
-    authUser: (user: AdminUser) => dispatch(authUser(user))
+    authUser: (user: AdminUser) => dispatch(authUser(user)),
+    showNotificationWithTimeout: (type: string, message: string) => showNotificationWithTimeout(dispatch, type, message)
   }
 }
 class Register extends Component<any, any>{
@@ -32,24 +33,33 @@ class Register extends Component<any, any>{
   onSubmit = (e: React.FormEvent) =>{
     e.preventDefault()
     this.setState({ loading: true })
-    fetch('/api/register', { 
+    fetch('/auth/register', { 
       method: 'post', 
       body: JSON.stringify({ fullName: this.state.fullName, username: this.state.username, email: this.state.email, password: this.state.password }), 
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
-    })
-    .then((res) => { return res.json() })
-    .then((data) => {
-      if (data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(data));
+    }).then((res) => { 
+      return res.json().then(json => ({status: res.status, body: json}))
+    }).then((data) => {
+      const status = data.status
+      const body = data.body
+
+      if (status != 200) {
+        this.props.showNotificationWithTimeout('error', body.errors[0].title)
+        this.setState({ loading: false })
+        return
+      }
+
+      if (body.accessToken) {
+        localStorage.setItem("user", JSON.stringify(body));
       }
       this.props.authUser(getCurrentUser())
       this.setState({ loading: false })
       this.setState({ redirect: true })
     }).catch((error) => {
-      this.props.showToast('error', 'Login failed. Please check your credentials.')
+      this.props.showNotificationWithTimeout('error', `Register failed. Please try again.`)
       this.setState({ loading: false })
       
     })
@@ -59,10 +69,6 @@ class Register extends Component<any, any>{
     const { redirect, loading } = this.state;
     if (redirect) {
       return <Redirect to='/'/>;
-    }
-
-    if (loading) {
-      return <Loading />
     }
 
     return (

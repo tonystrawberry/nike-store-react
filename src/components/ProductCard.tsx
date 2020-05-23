@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { unselectProduct } from '../redux/actions';
 import { Dispatch } from 'redux';
 
-import './ProductOverview.css';
-import './ProductCard.css';
+import './ProductOverview.scss';
+import './ProductCard.scss';
 import Logo from '../assets/nike_logo.svg';
 import NikeAirForceMedium from '../assets/nike_airforce-medium.jpg';
 import NikeAirForceLarge from '../assets/nike_airforce-large.jpg';

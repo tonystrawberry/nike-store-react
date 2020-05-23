@@ -7,7 +7,7 @@ import Loading from '../../components/Loading';
 import { AdminState, Product } from '../../types';
 import avatar from '../../assets/avatar.jpg';
 
-import './Admin.css';
+import './Admin.scss';
 import { Link, useLocation, NavLink, BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import AdminProducts from './AdminProducts';
 import AdminProfile from './AdminProfile';

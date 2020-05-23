@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import './Toast.css';
+import './Toast.scss';
 import { SingleToast, ToastState } from '../types';
 import close from '../assets/close.svg';
 import { hideToast } from '../redux/actions';

@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 
 import { AdminState } from '../../types';
 
-import './AdminProducts.css';
+import './AdminProducts.scss';
 
 const mapStateToProps = (state: { admin : AdminState }) => {
   return {

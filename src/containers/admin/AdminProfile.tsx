@@ -4,9 +4,9 @@ import { Dispatch } from 'redux';
 
 import { AdminState, AdminUser } from '../../types';
 
-import './AdminProfile.css';
-import './AdminCommon.css';
-import { onChangeProfileInput, showToast, authUser } from '../../redux/actions';
+import './AdminProfile.scss';
+import './AdminCommon.scss';
+import { onChangeProfileInput, authUser, showNotificationWithTimeout } from '../../redux/actions';
 import { authHeader, getCurrentUser } from '../../utils/auth';
 import Loading from '../../components/Loading';
 
@@ -22,8 +22,9 @@ const mapStateToProps = (state: { admin : AdminState }) => {
 const mapDispatchToProps = (dispatch : Dispatch ) => {
   return {
     onChangeProfileInput: (key: string, value: string) => { dispatch(onChangeProfileInput(key, value)) },
-    showToast: (type: string, message: string) => dispatch(showToast(type, message)),
+    showNotificationWithTimeout: (type: string, message: string) => showNotificationWithTimeout(dispatch, type, message),
     authUser: (user: AdminUser) => dispatch(authUser(user))
+    
   }
 }
 interface IAdminProfileProps {
@@ -31,7 +32,7 @@ interface IAdminProfileProps {
   username: string,
   email: string,
   user: AdminUser,
-  showToast: {(type: string, message: string): void}
+  showNotificationWithTimeout: {(type: string, message: string): void}
   onChangeProfileInput: {(key: string, value: string): void},
   authUser: {(user: AdminUser): void}
 }
@@ -41,6 +42,9 @@ interface IAdminProfileState {
   fullName: string,
   username: string,
   email: string,
+  originalFullName: string,
+  originalUsername: string,
+  originalEmail: string,
   loading: boolean
 }
 
@@ -54,34 +58,39 @@ class AdminProfile extends PureComponent<IAdminProfileProps, IAdminProfileState>
       fullName: "",
       username: "",
       email: "",
+      originalFullName: "",
+      originalUsername: "",
+      originalEmail: "",
       loading: true
     }
   }
 
   componentDidMount() {
-    fetch('/api/users/' + this.props.user.id)
+    fetch('/api/users/' + this.props.user.id, { headers: authHeader()})
     .then(res => {
       if (!res.ok) throw new Error(res.statusText)
       return res.json()
     })
     .then((body: any) => {
-      console.log("body", body)
       this.setState({
-        loading: false, id: body._id, fullName: body.fullName, username: body.username, email: body.email
+        loading: false, id: body._id, fullName: body.fullName, username: body.username, email: body.email, originalFullName: body.fullName, originalUsername: body.username, originalEmail: body.email
       })
     }).catch(error => {
-      console.log(error)
-      this.props.showToast('error', 'Could not get user data. Please refresh the page.')
+      this.props.showNotificationWithTimeout('error', 'Could not get user data. Please refresh the page.')
     });
   }
 
   onSubmit(e: React.FormEvent){
     e.preventDefault()
+    this.setState({ loading: true })
     let user = {
       id: this.state.id,
       fullName: this.state.fullName,
       username: this.state.username,
-      email: this.state.email
+      email: this.state.email,
+      originalFullName: this.state.fullName,
+      originalUsername: this.state.username,
+      originalEmail: this.state.email
     }
 
     fetch('/api/users', { 
@@ -89,23 +98,36 @@ class AdminProfile extends PureComponent<IAdminProfileProps, IAdminProfileState>
       body: JSON.stringify({ user: user }), 
       headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }})
-      .then((res) => { 
-        if (!res.ok) throw new Error(res.statusText)
-        return res.json() })
-      .then((data) => {
-        console.log("data", data);
-        if (data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(data));
-        }
-        this.props.authUser(getCurrentUser())
+      'Content-Type': 'application/json',
+      ... authHeader()
+      }
+    }).then((res) => { 
+      return res.json().then(json => ({status: res.status, body: json}))
+    }).then((data) => {
+      const status = data.status
+      const body = data.body
 
-        this.props.showToast('success', 'Profile has been updated.')
-      }).catch(error => {
-        console.log(error)
-        this.props.showToast('error', 'Could not update user profile. Please try again.')
-      });
+      if (status != 200) {
+        this.props.showNotificationWithTimeout('error', body.errors[0].title)
+        this.setState({ loading: false })
+        return
+      }
+
+      if (body.accessToken) {
+        localStorage.setItem("user", JSON.stringify(body)); 
+      }
+      this.props.authUser(getCurrentUser())
+
+      this.props.showNotificationWithTimeout('success', 'Profile has been updated.')
+      this.setState({ loading: false })
+    }).catch(error => {
+      this.props.showNotificationWithTimeout('error', 'Could not update user profile. Please try again.')
+      this.setState({ loading: false })
+    });
+  }
+
+  hasChanges(){
+    return this.state.originalFullName != this.state.fullName || this.state.originalEmail != this.state.email || this.state.originalUsername != this.state.username
   }
 
   render() {
@@ -117,6 +139,8 @@ class AdminProfile extends PureComponent<IAdminProfileProps, IAdminProfileState>
       )
     }
     return (
+
+
       <div className="admin-profile__container admin-main__container">
         <h1>PROFILE</h1>
         <div className="admin-profile__form">
@@ -124,7 +148,7 @@ class AdminProfile extends PureComponent<IAdminProfileProps, IAdminProfileState>
             <div className="form-group"><label>Full Name</label> <input type="text" value={this.state.fullName} required onChange={(e) => { this.setState({fullName: e.target.value}) }} /></div>
             <div className="form-group"><label>Username</label> <input type="text" value={this.state.username}required onChange={(e) => { this.setState({username: e.target.value}) }} /></div>
             <div className="form-group"><label>Email</label> <input type="email" value={this.state.email}required onChange={(e) => { this.setState({email: e.target.value}) }} /></div>
-            <input type="submit" value="Submit" />
+            <button className="button -large" disabled={!this.hasChanges()} type="submit" >Submit</button>
           </form>
         </div>
       </div>

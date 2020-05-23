@@ -1,9 +1,9 @@
 import React, { PureComponent, Suspense, Component } from 'react';
 
-import './Auth.css';
+import './Auth.scss';
 import { Redirect, Link } from 'react-router-dom';
 import { getCurrentUser } from '../../utils/auth';
-import { authUser, showToast } from '../../redux/actions';
+import { authUser, showNotificationWithTimeout } from '../../redux/actions';
 import { Dispatch } from 'redux';
 import { AdminUser } from '../../types';
 import { connect } from 'react-redux';
@@ -12,7 +12,7 @@ import Loading from '../../components/Loading';
 const mapDispatchToProps = (dispatch : Dispatch ) => {
   return {
     authUser: (user: AdminUser) => dispatch(authUser(user)),
-    showToast: (type: string, message: string) => dispatch(showToast(type, message))
+    showNotificationWithTimeout: (type: string, message: string) => showNotificationWithTimeout(dispatch, type, message)
   }
 }
 class Login extends Component<any, any>{
@@ -31,7 +31,7 @@ class Login extends Component<any, any>{
   onSubmit = (e: React.FormEvent) =>{
     e.preventDefault()
     this.setState({ loading: true })
-    fetch('/api/login', { 
+    fetch('/auth/login', { 
       method: 'post', 
       body: JSON.stringify({ email: this.state.email, password: this.state.password }), 
       headers: {
@@ -49,8 +49,8 @@ class Login extends Component<any, any>{
       this.setState({ loading: false })
       this.setState({ redirect: true })
     }).catch((error) => {
-      this.props.showToast('error', 'Login failed. Please check your credentials.')
       this.setState({ loading: false })
+      this.props.showNotificationWithTimeout('error', 'Login failed. Please check your credentials.')
     })
   }
 

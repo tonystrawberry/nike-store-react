@@ -30,6 +30,18 @@ input[type="submit"], .button{
   outline: none;
 }
 
+input[type="submit"]:disabled, .button:disabled {
+  opacity: 0.1;
+}
+
+input[type="submit"]:disabled:hover, .button:disabled:hover{
+  opacity: 0.1;
+}
+
+input[type="submit"].-large, .button.-large{
+  width: 100%;
+}
+
 input[type="submit"].-small, .button.-small{
   padding: .3rem 1rem;
   font-size: 0.8rem;
