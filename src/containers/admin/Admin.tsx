@@ -13,6 +13,9 @@ import AdminProducts from './AdminProducts';
 import AdminProfile from './AdminProfile';
 import { logoutUser } from '../../utils/auth';
 import { logout } from '../../redux/actions';
+import signout  from '../../assets/signout.svg';
+import store from '../../assets/store.svg';
+import user from '../../assets/user.svg';
 
 const mapStateToProps = (state: { admin : AdminState }) => {
   return {
@@ -80,6 +83,11 @@ class Admin extends PureComponent<IAdminProps, IAdminState> {
             <div className="admin__footer-container">
               <button className="button -secondary" onClick={this.onLogout}>Sign out</button>
             </div>
+          </div>
+          <div className="admin__footbar">
+            <div><NavLink to="/admin/profile" activeClassName='active' ><img src={user} /></NavLink></div>
+            <div><NavLink to="/admin/products" activeClassName='active'><img src={store} /></NavLink></div>
+            <div><img src={signout} onClick={this.onLogout} /></div>
           </div>
           <div className="admin__main">
             
