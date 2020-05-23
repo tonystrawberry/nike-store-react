@@ -8,7 +8,8 @@ import {
   AUTH_USER,
   LOGOUT_USER,
   SHOW_TOAST,
-  HIDE_TOAST
+  HIDE_TOAST,
+  UPDATE_ADMIN_PRODUCTS
 } from './constants'
 
 import { Product, AdminUser } from '../types'
@@ -24,6 +25,7 @@ export const authUser = (user: AdminUser) => ({ type: AUTH_USER, payload: user})
 export const logout = () => ({ type: LOGOUT_USER, payload: null})
 export const showToast = (id: number, type: string, message: string) => ({ type: SHOW_TOAST, payload: { type, message }})
 export const hideToast = (id: number) => ({ type: HIDE_TOAST, payload: { id }})
+export const updateAdminProducts = (products: Product[]) => ({ type: UPDATE_ADMIN_PRODUCTS, payload: products })
 
 let nextNotificationId = 0
 export const showNotificationWithTimeout = (dispatch: Dispatch, type: string, text: string) => {

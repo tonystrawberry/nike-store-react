@@ -22,7 +22,8 @@ export type AdminUser = {
 export type AdminState = {
   loading: boolean,
   profile: AdminProfile,
-  user: AdminUser | null
+  user: AdminUser | null,
+  products: Product[]
 }
 
 export type Action = {

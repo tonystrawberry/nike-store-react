@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import logo from '../assets/nike_logo.svg';
-import menu from '../assets/menu.svg';
+import logo from '../../assets/nike_logo.svg';
+import menu from '../../assets/menu.svg';
 import './Header.scss';
 import { Link } from 'react-router-dom';
-import { AdminUser } from '../types';
-import close from '../assets/close.svg';
+import { AdminUser } from '../../types';
+import close from '../../assets/close.svg';
 
 interface IHeaderProps {
   connected: boolean,

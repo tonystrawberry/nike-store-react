@@ -31,7 +31,7 @@ const Toast = (props: IToastProps) => {
       { props.toasts.map((toast: SingleToast) => {
         const { id, type, message } = toast;
         return (
-          <li className="toast">
+          <li key={id} className="toast">
             <p className={`toast__content ${type == 'success' ? 'success' : 'error'}`}>
               { message }
             </p>
