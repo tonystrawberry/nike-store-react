@@ -8,6 +8,8 @@ import { showNotificationWithTimeout, updateAdminProducts } from '../../redux/ac
 import './AdminProducts.scss';
 import { authHeader } from '../../utils/auth';
 import AdminProduct from '../../components/AdminProduct';
+import { Link, Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import AdminNewProduct from './AdminNewProduct';
 
 const mapStateToProps = (state: { admin : AdminState }) => {
   return {
@@ -50,16 +52,26 @@ class AdminProducts extends PureComponent<IAdminProductsProps, IAdminProductsSta
 
   render() {
     return (
-      <div className="admin-products__container admin-main__container">
-        <h1>YOUR PRODUCTS</h1>
-        <button className="button add-new">Add new</button>
-        <div className="admin-products__products-table">
-          {this.props.products.map((product: Product) => 
-            <AdminProduct product={product} />
-          )}
+      <Router>
+        <Switch>
+          <Route path="/admin/products/new">
+            <AdminNewProduct />
+          </Route>
+          <Route path="/admin/products">
+            <div className="admin-products__container admin-main__container">
+              <h1>YOUR PRODUCTS</h1>
+              <Link className="button add-new" to="/admin/products/new">Add new</Link>
+              <div className="admin-products__products-table">
+                {this.props.products.map((product: Product) => 
+                  <AdminProduct product={product} />
+                )}
 
-        </div>
-      </div>
+              </div>
+            </div>
+          </Route>
+        </Switch>
+      </Router>
+      
     );
   }
 };

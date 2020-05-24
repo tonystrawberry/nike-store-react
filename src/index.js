@@ -11,7 +11,7 @@ import { productOverview } from './redux/productOverview';
 import { admin } from './redux/admin';
 import { toast } from './redux/toast';
 
-import './index.css';
+import './index.scss';
 import './normalize.css';
 
 const logger = createLogger()

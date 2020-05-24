@@ -1,0 +1,39 @@
+.admin-products__new-product {
+  padding: 20px;
+}
+
+.image__container{
+  display: flex;
+  justify-content: center;
+
+  input[type="file"]{
+    display: none;
+  }
+}
+
+.image__subContainer {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+
+  .image {
+    width: 250px;
+    height: 250px;
+    background-position: 50%;
+    background-size: cover;
+    border: 2px solid #eeeeee;
+  }
+
+  &:hover button, button.noImage {
+    display: block;
+  }
+
+  button {
+    display: none;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0; 
+    height: 30px;
+  }
+}

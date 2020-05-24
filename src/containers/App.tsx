@@ -67,15 +67,17 @@ class App extends Component<IAppProps, IAppState> {
         <Router>
           <Toast />
           <Header user={this.props.user} connected={this.isConnected()} />
-          <Switch>
-            <Route exact path="/">
-              <ProductOverviewContainer />
-            </Route>
-            <Route exact path="/login" render={() => ( this.isConnected() ? <Redirect to="/" /> : <Login />)} />
-            <Route exact path="/register" render={() => ( this.isConnected() ? <Redirect to="/" /> : <Register />)} />
-            <Route path="/admin" render={() => ( this.isConnected() ? <Admin /> : <Redirect to="/" />)} />
-            <Route render={() => <Redirect to="/" />} />
-          </Switch>
+          <main>
+            <Switch>
+              <Route exact path="/">
+                <ProductOverviewContainer />
+              </Route>
+              <Route exact path="/login" render={() => ( this.isConnected() ? <Redirect to="/" /> : <Login />)} />
+              <Route exact path="/register" render={() => ( this.isConnected() ? <Redirect to="/" /> : <Register />)} />
+              <Route path="/admin" render={() => ( this.isConnected() ? <Admin /> : <Redirect to="/" />)} />
+              <Route render={() => <Redirect to="/" />} />
+            </Switch>
+          </main>
         </Router>
       </div>
     );

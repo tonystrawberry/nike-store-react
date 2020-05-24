@@ -4,11 +4,11 @@ import { Dispatch } from 'redux';
 
 import Loading from '../../components/Loading';
 
-import { AdminState, Product } from '../../types';
+import { AdminState } from '../../types';
 import avatar from '../../assets/avatar.jpg';
 
 import './Admin.scss';
-import { Link, useLocation, NavLink, BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { NavLink, BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import AdminProducts from './AdminProducts';
 import AdminProfile from './AdminProfile';
 import { logoutUser } from '../../utils/auth';
