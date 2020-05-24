@@ -2,7 +2,8 @@ import {
   CHANGE_PROFILE_INPUT,
   AUTH_USER,
   LOGOUT_USER,
-  UPDATE_ADMIN_PRODUCTS
+  UPDATE_ADMIN_PRODUCTS,
+  DELETE_ADMIN_PRODUCTS
 } from './constants';
 
 import { AdminState, Action, AdminProfile } from '../types'
@@ -32,6 +33,10 @@ export const admin = (state: AdminState = initialStateOverview, action: Action =
       return {...state, user: null, loading: false }
     case UPDATE_ADMIN_PRODUCTS:
       return {...state, products: action.payload}
+    case DELETE_ADMIN_PRODUCTS:
+      let products = state.products.slice()
+      products = products.filter( product => (product._id !== action.payload.id))
+      return {...state, products: products}
     default:
       return state
   }

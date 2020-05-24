@@ -7,6 +7,8 @@ import dummySquare from '../../assets/dummy_square.png'
 import { numberToPrice, isInteger } from '../../utils/utils'
 import { authHeader } from '../../utils/auth'
 import { showNotificationWithTimeout } from '../../redux/actions'
+import Loading from '../../components/Loading'
+import { Redirect } from 'react-router-dom'
 
 
 const mapStateToProps = () => {
@@ -34,7 +36,8 @@ interface IAdminNewProductState {
   priceString: string,
   description: string,
   imageUrl: string,
-  imageFile: Blob | null
+  imageFile: Blob | null,
+  productAdded: boolean
 }
 
 class AdminNewProductProduct extends PureComponent<IAdminNewProductProps, IAdminNewProductState> {
@@ -54,7 +57,8 @@ class AdminNewProductProduct extends PureComponent<IAdminNewProductProps, IAdmin
       priceString: "",
       description: "",
       imageUrl: dummySquare,
-      imageFile: null
+      imageFile: null,
+      productAdded: false
     }
   }
 
@@ -93,15 +97,13 @@ class AdminNewProductProduct extends PureComponent<IAdminNewProductProps, IAdmin
     product.append('subtitle2', this.state.subtitle2)
     product.append('price', this.state.price?.toString() as string)
     product.append('description', this.state.description)
-    if (this.state.imageFile)
-      product.append('image', this.state.imageFile, 'product-image')
+    product.append('image', this.state.imageFile as Blob, 'product-image')
 
     fetch('/api/products', { 
       method: 'post', 
       body: product,
       headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
       ... authHeader()
       }
     }).then((res) => { 
@@ -116,11 +118,8 @@ class AdminNewProductProduct extends PureComponent<IAdminNewProductProps, IAdmin
         return
       }
 
-      if (body.accessToken) {
-        localStorage.setItem("user", JSON.stringify(body))
-      }
       this.props.showNotificationWithTimeout('success', 'Product has been added.')
-      this.setState({ loading: false })
+      this.setState({ productAdded: true, loading: false })
     }).catch(error => {
       this.props.showNotificationWithTimeout('error', 'Could not add new product. Please try again.')
       this.setState({ loading: false })
@@ -128,7 +127,11 @@ class AdminNewProductProduct extends PureComponent<IAdminNewProductProps, IAdmin
   }
 
   
-  render() {      
+  render() {     
+    if (this.state.productAdded){
+      return <Redirect to='/admin/products'/>
+    }
+    
     return (
       <div className="admin-products__new-product-container admin-main__container">
         <h1>NEW PRODUCT</h1>
@@ -152,7 +155,7 @@ class AdminNewProductProduct extends PureComponent<IAdminNewProductProps, IAdmin
               </div>
             </div>
             
-            <button className="button -large" type="submit">Submit</button>
+            <button className="button -large" disabled={this.state.loading} type="submit">Submit</button>
            </form>
          </div>
       </div>

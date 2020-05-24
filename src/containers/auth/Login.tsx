@@ -57,7 +57,7 @@ class Login extends Component<any, any>{
   render() {
     const { redirect, loading } = this.state;
     if (redirect) {
-      return <Redirect to='/'/>;
+      return <Redirect to='/'/>
     }
 
     return (

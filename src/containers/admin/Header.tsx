@@ -36,13 +36,13 @@ class Header extends Component<IHeaderProps, IHeaderState> {
                 <img width="20" src={menu} alt="Menu" onClick={() => { this.setState({menuActive: !this.state.menuActive}) }} />
               </div>
               <div className={`menu__dropdown-mobile ${this.state.menuActive ? 'active' : ''}`}>
-                <div><Link className="" to="/admin" onClick={() => { this.setState({ menuActive: false }) }}>ACCOUNT</Link></div>
+                <div><Link className="" to="/admin/products" onClick={() => { this.setState({ menuActive: false }) }}>ACCOUNT</Link></div>
                 <div className="close"><img width="40px" src={close} onClick={() => this.setState({menuActive: !this.state.menuActive})}></img></div>
               </div>
 
               <div className={`menu__dropdown ${this.state.menuActive ? 'active' : ''}`}>
                 <ul>
-                  <li><Link className="menu right" to="/admin" onClick={() => { this.setState({ menuActive: false }) }}>ACCOUNT</Link></li>
+                  <li><Link className="menu right" to="/admin/products" onClick={() => { this.setState({ menuActive: false }) }}>ACCOUNT</Link></li>
                 </ul>
               </div>
             </React.Fragment>

@@ -5,35 +5,47 @@
 .image__container{
   display: flex;
   justify-content: center;
+  
+  &.-thumbnail{
+    .image__subContainer {
+      width: 125px;
+      height: 125px;
+
+      .image {
+        width: 125px;
+        height: 125px;
+      }
+    }
+  }
+
+  .image__subContainer {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+  
+    .image {
+      width: 250px;
+      height: 250px;
+      background-position: 50%;
+      background-size: cover;
+      border: 2px solid #eeeeee;
+    }
+  
+    &:hover button, button.noImage {
+      display: block;
+    }
+  
+    button {
+      display: none;
+      margin: auto;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0; 
+      height: 30px;
+    }
+  }
 
   input[type="file"]{
     display: none;
-  }
-}
-
-.image__subContainer {
-  position: relative;
-  width: 250px;
-  height: 250px;
-  overflow: hidden;
-
-  .image {
-    width: 250px;
-    height: 250px;
-    background-position: 50%;
-    background-size: cover;
-    border: 2px solid #eeeeee;
-  }
-
-  &:hover button, button.noImage {
-    display: block;
-  }
-
-  button {
-    display: none;
-    margin: auto;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0; 
-    height: 30px;
   }
 }

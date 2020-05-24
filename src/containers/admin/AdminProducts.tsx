@@ -43,7 +43,6 @@ class AdminProducts extends PureComponent<IAdminProductsProps, IAdminProductsSta
       return res.json()
     })
     .then((body: any) => {
-      console.log("body", body)
       this.props.updateAdminProducts(body)
     }).catch(error => {
       this.props.showNotificationWithTimeout('error', 'Could not get admin products. Please refresh the page.')

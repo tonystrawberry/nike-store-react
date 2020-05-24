@@ -62,7 +62,7 @@ class Admin extends PureComponent<IAdminProps, IAdminState> {
     }
 
     if (this.state.logout){
-      return <Redirect to='/'/>;
+      return <Redirect to='/'/>
     }
 
     return (
@@ -85,8 +85,8 @@ class Admin extends PureComponent<IAdminProps, IAdminState> {
             </div>
           </div>
           <div className="admin__footbar">
-            <div><NavLink to="/admin/profile" activeClassName='active' ><img src={user} /></NavLink></div>
-            <div><NavLink to="/admin/products" activeClassName='active'><img src={store} /></NavLink></div>
+            <div><NavLink to="/admin/profile" activeClassName='active' ><img src={user} /><div className="-active-mark"></div></NavLink></div>
+            <div><NavLink to="/admin/products" activeClassName='active'><img src={store} /><div className="-active-mark"></div></NavLink></div>
             <div><img src={signout} onClick={this.onLogout} /></div>
           </div>
           <div className="admin__main">

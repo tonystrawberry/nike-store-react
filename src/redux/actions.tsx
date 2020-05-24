@@ -9,7 +9,8 @@ import {
   LOGOUT_USER,
   SHOW_TOAST,
   HIDE_TOAST,
-  UPDATE_ADMIN_PRODUCTS
+  UPDATE_ADMIN_PRODUCTS,
+  DELETE_ADMIN_PRODUCTS
 } from './constants'
 
 import { Product, AdminUser } from '../types'
@@ -26,6 +27,7 @@ export const logout = () => ({ type: LOGOUT_USER, payload: null})
 export const showToast = (id: number, type: string, message: string) => ({ type: SHOW_TOAST, payload: { type, message }})
 export const hideToast = (id: number) => ({ type: HIDE_TOAST, payload: { id }})
 export const updateAdminProducts = (products: Product[]) => ({ type: UPDATE_ADMIN_PRODUCTS, payload: products })
+export const deleteAdminProduct = (id: string) => ({ type: DELETE_ADMIN_PRODUCTS, payload: { id: id} })
 
 let nextNotificationId = 0
 export const showNotificationWithTimeout = (dispatch: Dispatch, type: string, text: string) => {
