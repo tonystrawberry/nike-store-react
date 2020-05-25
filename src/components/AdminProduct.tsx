@@ -9,6 +9,7 @@ import { Product } from '../types';
 import { numberToPrice } from '../utils/utils';
 import { deleteAdminProduct, showNotificationWithTimeout } from '../redux/actions';
 import { authHeader } from '../utils/auth';
+import { NavLink } from 'react-router-dom';
 
 
 const mapStateToProps = () => {
@@ -51,7 +52,7 @@ class AdminProduct extends PureComponent<IAdminProductProps, IAdminProductState>
       headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      ... authHeader()
+      ...authHeader()
       }
     }).then((res) => { 
       return res.json().then(json => ({status: res.status, body: json}))
@@ -59,7 +60,7 @@ class AdminProduct extends PureComponent<IAdminProductProps, IAdminProductState>
       const status = data.status
       const body = data.body
 
-      if (status != 200) {
+      if (status !== 200) {
         this.props.showNotificationWithTimeout('error', body.errors[0].title)
         this.setState({ loading: false })
         return
@@ -75,6 +76,7 @@ class AdminProduct extends PureComponent<IAdminProductProps, IAdminProductState>
 
   render() {      
     return (
+      <NavLink className="admin-products__link" to={`/admin/products/${this.props.product._id}`}>
       <div className="admin-products__product-item">
         <div className="prd-image">
         <div className="image__container -thumbnail">
@@ -94,9 +96,10 @@ class AdminProduct extends PureComponent<IAdminProductProps, IAdminProductState>
           <div>¥ {numberToPrice(this.props.product.price)}</div>
         </div>
         <div className="prd-actions">
-          <img width="20px" src={close} onClick={() => this.deleteProduct()}></img>
+          <img width="20px" src={close} onClick={() => this.deleteProduct()} alt="Delete"></img>
         </div>
       </div>
+      </NavLink>
     );
   }
 };

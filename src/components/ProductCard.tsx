@@ -6,8 +6,6 @@ import { Dispatch } from 'redux';
 import './ProductOverview.scss';
 import './ProductCard.scss';
 import Logo from '../assets/nike_logo.svg';
-import NikeAirForceMedium from '../assets/nike_airforce-medium.jpg';
-import NikeAirForceLarge from '../assets/nike_airforce-large.jpg';
 import { Product } from '../types';
 import Loading from './Loading';
 import { numberToPrice } from '../utils/utils';

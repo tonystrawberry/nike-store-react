@@ -1,4 +1,4 @@
-import React, { PureComponent, Suspense, Component } from 'react';
+import React, { Component } from 'react';
 
 import './Auth.scss';
 import { Redirect, Link } from 'react-router-dom';

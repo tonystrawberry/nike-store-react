@@ -1,4 +1,4 @@
-import React, { PureComponent, Suspense } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -83,23 +83,21 @@ class AdminProfile extends PureComponent<IAdminProfileProps, IAdminProfileState>
   onSubmit(e: React.FormEvent){
     e.preventDefault()
     this.setState({ loading: true })
-    let user = {
-      id: this.state.id,
-      fullName: this.state.fullName,
-      username: this.state.username,
-      email: this.state.email,
-      originalFullName: this.state.fullName,
-      originalUsername: this.state.username,
-      originalEmail: this.state.email
-    }
 
+    let user = {id: this.state.id} as any;
+    if (this.state.fullName != this.state.originalFullName) user.fullName = this.state.fullName
+    if (this.state.username != this.state.originalUsername) user.username = this.state.username
+    if (this.state.email != this.state.originalEmail) user.email = this.state.email
+
+
+    console.log("user", user)
     fetch('/api/users', { 
       method: 'put', 
       body: JSON.stringify({ user: user }), 
       headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      ... authHeader()
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        ...authHeader()
       }
     }).then((res) => { 
       return res.json().then(json => ({status: res.status, body: json}))
@@ -107,19 +105,25 @@ class AdminProfile extends PureComponent<IAdminProfileProps, IAdminProfileState>
       const status = data.status
       const body = data.body
 
-      if (status != 200) {
+      if (status !== 200) {
         this.props.showNotificationWithTimeout('error', body.errors[0].title)
         this.setState({ loading: false })
         return
       }
 
       if (body.accessToken) {
-        localStorage.setItem("user", JSON.stringify(body)); 
+        localStorage.setItem("user", JSON.stringify(body))
       }
       this.props.authUser(getCurrentUser())
 
+      if (body.fullName) this.setState({fullName: body.fullName, originalFullName: body.fullName})
+      if (body.username) this.setState({username: body.username, originalUsername: body.username})
+      if (body.email) this.setState({email: body.email, originalEmail: body.email})
+
       this.props.showNotificationWithTimeout('success', 'Profile has been updated.')
       this.setState({ loading: false })
+
+    
     }).catch(error => {
       this.props.showNotificationWithTimeout('error', 'Could not update user profile. Please try again.')
       this.setState({ loading: false })
@@ -127,7 +131,7 @@ class AdminProfile extends PureComponent<IAdminProfileProps, IAdminProfileState>
   }
 
   hasChanges(){
-    return this.state.originalFullName != this.state.fullName || this.state.originalEmail != this.state.email || this.state.originalUsername != this.state.username
+    return this.state.originalFullName !== this.state.fullName || this.state.originalEmail !== this.state.email || this.state.originalUsername !== this.state.username
   }
 
   render() {

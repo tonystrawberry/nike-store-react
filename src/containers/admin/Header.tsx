@@ -37,7 +37,7 @@ class Header extends Component<IHeaderProps, IHeaderState> {
               </div>
               <div className={`menu__dropdown-mobile ${this.state.menuActive ? 'active' : ''}`}>
                 <div><Link className="" to="/admin/products" onClick={() => { this.setState({ menuActive: false }) }}>ACCOUNT</Link></div>
-                <div className="close"><img width="40px" src={close} onClick={() => this.setState({menuActive: !this.state.menuActive})}></img></div>
+                <div className="close"><img width="40px" src={close} onClick={() => this.setState({menuActive: !this.state.menuActive})} alt="Close"></img></div>
               </div>
 
               <div className={`menu__dropdown ${this.state.menuActive ? 'active' : ''}`}>

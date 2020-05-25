@@ -75,7 +75,7 @@ class ProductOverviewContainer extends PureComponent<IProductOverviewContainerPr
       )
     }
 
-    var product = this.props.products.find(product => product._id == this.props.selectedProductId)
+    var product = this.props.products.find(product => product._id === this.props.selectedProductId)
 
     return (
       <div className={`product-overview__container ${this.props.selected ? 'product-selected' : ''}`}>

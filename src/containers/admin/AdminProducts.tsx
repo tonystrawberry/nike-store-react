@@ -1,4 +1,4 @@
-import React, { PureComponent, Suspense } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -10,6 +10,7 @@ import { authHeader } from '../../utils/auth';
 import AdminProduct from '../../components/AdminProduct';
 import { Link, Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import AdminNewProduct from './AdminNewProduct';
+import AdminUpdateProduct from './AdminUpdateProduct';
 
 const mapStateToProps = (state: { admin : AdminState }) => {
   return {
@@ -56,18 +57,19 @@ class AdminProducts extends PureComponent<IAdminProductsProps, IAdminProductsSta
           <Route path="/admin/products/new">
             <AdminNewProduct />
           </Route>
-          <Route path="/admin/products">
+          <Route exact path="/admin/products">
             <div className="admin-products__container admin-main__container">
               <h1>YOUR PRODUCTS</h1>
               <Link className="button add-new" to="/admin/products/new">Add new</Link>
               <div className="admin-products__products-table">
                 {this.props.products.map((product: Product) => 
-                  <AdminProduct product={product} />
+                  <AdminProduct key={product._id} product={product} />
                 )}
 
               </div>
             </div>
           </Route>
+          <Route exact path="/admin/products/:id" component={AdminUpdateProduct} />
         </Switch>
       </Router>
       

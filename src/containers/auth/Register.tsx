@@ -46,7 +46,7 @@ class Register extends Component<any, any>{
       const status = data.status
       const body = data.body
 
-      if (status != 200) {
+      if (status !== 200) {
         this.props.showNotificationWithTimeout('error', body.errors[0].title)
         this.setState({ loading: false })
         return

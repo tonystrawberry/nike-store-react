@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { selectProduct } from '../redux/actions';
 import { Dispatch } from 'redux';
 
-import NikeAirForceMedium from '../assets/nike_airforce-medium.jpg';
-
 import './ProductOverview.scss';
 import { Product } from '../types';
 

@@ -1,4 +1,4 @@
-import React, { PureComponent, Component } from 'react';
+import React, { Component } from 'react';
 import './App.scss';
 import Header from './admin/Header';
 import ProductOverviewContainer from './ProductOverviewContainer'

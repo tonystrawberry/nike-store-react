@@ -3,5 +3,5 @@ export function numberToPrice(price: number) : string{
 }
 
 export function isInteger(s: string){
-  return parseInt(s) != NaN
+  return !isNaN(parseInt(s))
 }

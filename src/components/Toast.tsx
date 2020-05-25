@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -32,10 +32,10 @@ const Toast = (props: IToastProps) => {
         const { id, type, message } = toast;
         return (
           <li key={id} className="toast">
-            <p className={`toast__content ${type == 'success' ? 'success' : 'error'}`}>
+            <p className={`toast__content ${type === 'success' ? 'success' : 'error'}`}>
               { message }
             </p>
-            <img width="20px" src={close} onClick={() => props.hideToast(id)}></img>
+            <img width="20px" src={close} onClick={() => props.hideToast(id)} alt="Message"></img>
           </li>
         );
       }) }

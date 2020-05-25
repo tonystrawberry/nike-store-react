@@ -1,4 +1,4 @@
-import React, { PureComponent, Suspense } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -70,7 +70,7 @@ class Admin extends PureComponent<IAdminProps, IAdminState> {
         <div className="admin__container">
           <div className="admin__sidebar">
             <div className="admin__avatar-container">
-              <img src={avatar}>
+              <img src={avatar} alt="Avatar">
 
               </img>
             </div>
@@ -85,9 +85,9 @@ class Admin extends PureComponent<IAdminProps, IAdminState> {
             </div>
           </div>
           <div className="admin__footbar">
-            <div><NavLink to="/admin/profile" activeClassName='active' ><img src={user} /><div className="-active-mark"></div></NavLink></div>
-            <div><NavLink to="/admin/products" activeClassName='active'><img src={store} /><div className="-active-mark"></div></NavLink></div>
-            <div><img src={signout} onClick={this.onLogout} /></div>
+            <div><NavLink to="/admin/profile" activeClassName='active' ><img src={user} alt="Profile" /><div className="-active-mark"></div></NavLink></div>
+            <div><NavLink to="/admin/products" activeClassName='active'><img src={store} alt="Products" /><div className="-active-mark"></div></NavLink></div>
+            <div><img src={signout} onClick={this.onLogout} alt="Logout" /></div>
           </div>
           <div className="admin__main">
             
