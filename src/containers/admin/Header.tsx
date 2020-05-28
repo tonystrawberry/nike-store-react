@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from '../../assets/nike_logo.svg';
 import menu from '../../assets/menu.svg';
+
+import cart from '../../assets/cart.svg';
 import './Header.scss';
 import { Link } from 'react-router-dom';
 import { AdminUser } from '../../types';
@@ -32,6 +34,7 @@ class Header extends Component<IHeaderProps, IHeaderState> {
           this.props.connected ? 
             <React.Fragment>
               <div className="menu right">
+                <Link className="cart" to="/cart"><img width="20" src={cart} alt="Cart" /></Link>
                 {/* <Link className="menu right" to="/admin"><img width="20" src={menu} alt="Menu" /></Link> */}
                 <img width="20" src={menu} alt="Menu" onClick={() => { this.setState({menuActive: !this.state.menuActive}) }} />
               </div>
@@ -49,6 +52,7 @@ class Header extends Component<IHeaderProps, IHeaderState> {
           : 
             <React.Fragment>
               <div className="right">
+                <Link className="cart" to="/cart"><img width="20" src={cart} alt="Cart" /></Link>
                 <Link className="login" to="/login"><button className="button">Sign in</button></Link>
               </div>
             </React.Fragment>

@@ -52,3 +52,9 @@ export type SingleToast = {
 }
 
 
+export type SessionState = {
+  cart: {
+    products: any[]
+  }
+}
+

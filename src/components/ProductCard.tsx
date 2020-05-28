@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { unselectProduct } from '../redux/actions';
+import { unselectProduct, addProductToCart } from '../redux/actions';
 import { Dispatch } from 'redux';
 
 import './ProductOverview.scss';
@@ -19,14 +19,16 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch : Dispatch ) => {
   return {
-    onUnselected: () => dispatch(unselectProduct())
+    onUnselected: () => dispatch(unselectProduct()),
+    addProductToCart: (id: string) => dispatch(addProductToCart(id))
   }
 }
 
 interface IProductCardProps {
   new: boolean,
   onUnselected: {(): void},
-  product: Product | undefined
+  product: Product | undefined,
+  addProductToCart: {(id: string): void}
 }
 
 interface IProductCardState {
@@ -135,7 +137,7 @@ class ProductCard extends PureComponent<IProductCardProps, IProductCardState> {
               </div>
             </div> */}
             <div className="product-card__buy-price">
-              <a href="/" className="product-card__buy"><i className="fas fa-shopping-cart"></i>Add to cart</a>
+              <button className="button product-card__buy" onClick={() => this.props.addProductToCart(this.props.product?._id as string)}><i className="fas fa-shopping-cart"></i>Add to cart</button>
               <div className="product-card__price">
                 <i className="fas fa-yen-sign"></i>
                 <h1>{ numberToPrice(this.props.product.price) }</h1>

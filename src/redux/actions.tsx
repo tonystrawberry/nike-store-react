@@ -11,7 +11,10 @@ import {
   HIDE_TOAST,
   UPDATE_ADMIN_PRODUCTS,
   DELETE_ADMIN_PRODUCTS,
-  UPDATE_SINGLE_ADMIN_PRODUCT
+  UPDATE_SINGLE_ADMIN_PRODUCT,
+  ADD_PRODUCT_TO_CART,
+  INIT_PRODUCTS_CART,
+  DELETE_PRODUCT_FROM_CART
 } from './constants'
 
 import { Product, AdminUser } from '../types'
@@ -31,6 +34,9 @@ export const updateAdminProducts = (products: Product[]) => ({ type: UPDATE_ADMI
 export const updateSingleAdminProduct = (product: Product) => ({ type: UPDATE_SINGLE_ADMIN_PRODUCT, payload: { product }})
 
 export const deleteAdminProduct = (id: string) => ({ type: DELETE_ADMIN_PRODUCTS, payload: { id: id} })
+export const addProductToCart = (id: string) => ({ type: ADD_PRODUCT_TO_CART, payload: { id: id }})
+export const deleteProductFromCart = (id: string) => ({ type: DELETE_PRODUCT_FROM_CART, payload: { id: id }})
+export const initProductsCart = () => ({ type: INIT_PRODUCTS_CART, payload: null})
 
 let nextNotificationId = 0
 export const showNotificationWithTimeout = (dispatch: Dispatch, type: string, text: string) => {
@@ -40,4 +46,19 @@ export const showNotificationWithTimeout = (dispatch: Dispatch, type: string, te
   setTimeout(() => {
     dispatch(hideToast(id))
   }, 5000)
+}
+
+export const fetchStoreProducts = (dispatch: Dispatch) => {
+  dispatch(fetchProducts())
+  fetch('/api/products')
+    .then(res => {
+      if (!res.ok) throw new Error(res.statusText)
+      return res.text()
+    })
+    .then((body: any) => {
+      dispatch(fetchProductsSuccess(JSON.parse(body)))
+    })
+    .catch(error => {
+      showNotificationWithTimeout(dispatch, 'error', 'Products fetch failed. Please refresh the page or login again.')
+    });
 }

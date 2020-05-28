@@ -7,7 +7,7 @@ import '../containers/admin/AdminProducts.scss';
 import close from '../assets/close_black.svg';
 import { Product } from '../types';
 import { numberToPrice } from '../utils/utils';
-import { deleteAdminProduct, showNotificationWithTimeout } from '../redux/actions';
+import { deleteAdminProduct, showNotificationWithTimeout, fetchStoreProducts } from '../redux/actions';
 import { authHeader } from '../utils/auth';
 import { NavLink } from 'react-router-dom';
 
@@ -21,14 +21,16 @@ const mapStateToProps = () => {
 const mapDispatchToProps = (dispatch : Dispatch ) => {
   return {
     deleteAdminProduct: (id: string) => { dispatch(deleteAdminProduct(id))},
-    showNotificationWithTimeout: (type: string, message: string) => showNotificationWithTimeout(dispatch, type, message)
+    showNotificationWithTimeout: (type: string, message: string) => showNotificationWithTimeout(dispatch, type, message),
+    fetchStoreProducts: () => fetchStoreProducts(dispatch)
   }
 }
 
 interface IAdminProductProps {
   product: Product,
   deleteAdminProduct: {(id:string): void},
-  showNotificationWithTimeout: {(type: string, message: string): void}
+  showNotificationWithTimeout: {(type: string, message: string): void},
+  fetchStoreProducts: {(): void}
 }
 
 interface IAdminProductState {
@@ -68,6 +70,7 @@ class AdminProduct extends PureComponent<IAdminProductProps, IAdminProductState>
 
       this.props.showNotificationWithTimeout('success', 'Product has been deleted.')
       this.props.deleteAdminProduct(this.props.product._id)
+      this.props.fetchStoreProducts()
     }).catch(error => {
       this.props.showNotificationWithTimeout('error', 'Could not delete product. Please try again.')
       this.setState({ loading: false })
@@ -96,7 +99,7 @@ class AdminProduct extends PureComponent<IAdminProductProps, IAdminProductState>
           <div>¥ {numberToPrice(this.props.product.price)}</div>
         </div>
         <div className="prd-actions">
-          <img width="20px" src={close} onClick={() => this.deleteProduct()} alt="Delete"></img>
+          <img width="20px" src={close} onClick={(e) => { e.stopPropagation(); e.preventDefault(); this.deleteProduct()}} alt="Delete"></img>
         </div>
       </div>
       </NavLink>

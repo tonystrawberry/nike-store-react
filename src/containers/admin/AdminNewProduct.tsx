@@ -6,8 +6,9 @@ import './AdminNewProduct.scss'
 import dummySquare from '../../assets/dummy_square.png'
 import { isInteger } from '../../utils/utils'
 import { authHeader } from '../../utils/auth'
-import { showNotificationWithTimeout } from '../../redux/actions'
+import { showNotificationWithTimeout, updateSingleAdminProduct, fetchProducts, fetchStoreProducts } from '../../redux/actions'
 import { Redirect } from 'react-router-dom'
+import { Product } from '../../types'
 
 
 const mapStateToProps = () => {
@@ -18,12 +19,18 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch : Dispatch ) => {
   return {
-    showNotificationWithTimeout: (type: string, message: string) => showNotificationWithTimeout(dispatch, type, message)
+    showNotificationWithTimeout: (type: string, message: string) => showNotificationWithTimeout(dispatch, type, message),
+    updateSingleAdminProduct: (product: Product) => dispatch(updateSingleAdminProduct(product)),
+    fetchProducts: () => dispatch(fetchProducts()),
+    fetchStoreProducts: () => fetchStoreProducts(dispatch)
   }
 }
 
 interface IAdminNewProductProps {
-  showNotificationWithTimeout: {(type: string, message: string): void}
+  showNotificationWithTimeout: {(type: string, message: string): void},
+  updateSingleAdminProduct: {(product: Product): void},
+  fetchProducts: {(): void},
+  fetchStoreProducts: {(): void}
 }
 
 interface IAdminNewProductState {
@@ -96,7 +103,9 @@ class AdminNewProductProduct extends PureComponent<IAdminNewProductProps, IAdmin
     product.append('subtitle2', this.state.subtitle2)
     product.append('price', this.state.price?.toString() as string)
     product.append('description', this.state.description)
-    product.append('image', this.state.imageFile as Blob, 'product-image')
+    if (this.state.imageFile){
+      product.append('image', this.state.imageFile as Blob, 'product-image')
+    }
 
     fetch('/api/products', { 
       method: 'post', 
@@ -116,8 +125,9 @@ class AdminNewProductProduct extends PureComponent<IAdminNewProductProps, IAdmin
         this.setState({ loading: false })
         return
       }
-
       this.props.showNotificationWithTimeout('success', 'Product has been added.')
+      this.props.updateSingleAdminProduct(body)
+      this.props.fetchStoreProducts()
       this.setState({ productAdded: true, loading: false })
     }).catch(error => {
       this.props.showNotificationWithTimeout('error', 'Could not add new product. Please try again.')
